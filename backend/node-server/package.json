@@ -1,0 +1,25 @@
+{
+  "name": "mind-morph",
+  "version": "1.0.0",
+  "description": "A backend Server for MOOC platform",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/narayan1632/MindMorph/backend/node-server/"
+  },
+  "keywords": [
+    "mindmorph",
+    "MOOC",
+    "backend",
+    "express-app"
+  ],
+  "author": "Narayan Gautam",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
