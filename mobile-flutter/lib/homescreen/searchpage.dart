@@ -10,7 +10,6 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  @override
   String searchValue = '';
   final List<String> _suggestions = [
     'Flutter',
@@ -22,7 +21,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: EasySearchBar(
-          title: Text('search.....'),
+          title: const Text('search.....'),
           backgroundColor: Colors.transparent,
           onSearch: (value) => setState(() => searchValue = value),
           suggestions: _suggestions),
