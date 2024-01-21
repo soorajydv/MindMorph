@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
 import 'package:morph/homescreen/barnevigation.dart';
+import 'package:morph/homescreen/profile.dart/acountdetaildemo.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Acount extends StatefulWidget {
@@ -39,13 +40,13 @@ class _AcountState extends State<Acount> {
                           )),
                       90.widthBox,
                       Align(
+                        alignment: Alignment.center,
                         child: "My profile"
                             .text
                             .color(FeatureColor)
                             .bold
                             .size(18)
                             .make(),
-                        alignment: Alignment.center,
                       ),
                     ],
                   ),
@@ -130,33 +131,11 @@ class _AcountState extends State<Acount> {
                   ),
                   35.heightBox,
                   ListView(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     shrinkWrap: true,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(2),
-                        height: 70,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: listcolor,
-                        ),
-                        alignment: Alignment.center,
-                        child: ListTile(
-                            leading: Icon(
-                              Icons.person,
-                              color: Color.fromARGB(196, 69, 150, 161),
-                              size: 30,
-                            ),
-                            title: Text('Personal Information'),
-                            trailing: Icon(
-                              Icons.navigate_next,
-                              color: Colors.black,
-                            )),
-                      ),
-                      5.heightBox,
-                      Container(
-                        padding: EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(2),
                         height: 70,
                         width: 80,
                         decoration: BoxDecoration(
@@ -166,20 +145,51 @@ class _AcountState extends State<Acount> {
                         alignment: Alignment.center,
                         child: ListTile(
                           leading: Icon(
-                            FontAwesomeIcons.bookOpen,
-                            color: Color.fromARGB(162, 22, 49, 58),
-                            size: 40,
+                            Icons.person,
+                            color: Color.fromARGB(196, 69, 150, 161),
+                            size: 30,
                           ),
-                          title: Text('Book and Notes'),
-                          trailing: Icon(
-                            Icons.navigate_next,
-                            color: Colors.black,
-                          ),
+                          title: Text('Personal Information'),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.to(() => demopage());
+                              },
+                              icon: Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              )),
                         ),
                       ),
                       5.heightBox,
                       Container(
                         padding: EdgeInsets.all(2),
+                        height: 70,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: listcolor,
+                        ),
+                        alignment: Alignment.center,
+                        child: ListTile(
+                          leading: const Icon(
+                            FontAwesomeIcons.bookOpen,
+                            color: Color.fromARGB(162, 22, 49, 58),
+                            size: 40,
+                          ),
+                          title: const Text('Book and Notes'),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.to(() => demopage());
+                              },
+                              icon: Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              )),
+                        ),
+                      ),
+                      5.heightBox,
+                      Container(
+                        padding: const EdgeInsets.all(2),
                         height: 70,
                         width: 80,
                         decoration: BoxDecoration(
@@ -194,15 +204,19 @@ class _AcountState extends State<Acount> {
                             size: 40,
                           ),
                           title: Text('Grade'),
-                          trailing: Icon(
-                            Icons.navigate_next,
-                            color: Colors.black,
-                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.to(() => demopage());
+                              },
+                              icon: Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              )),
                         ),
                       ),
                       5.heightBox,
                       Container(
-                        padding: EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(2),
                         height: 70,
                         width: 80,
                         decoration: BoxDecoration(
@@ -217,10 +231,14 @@ class _AcountState extends State<Acount> {
                             size: 40,
                           ),
                           title: Text('Setting & Privacy'),
-                          trailing: Icon(
-                            Icons.navigate_next,
-                            color: Colors.black,
-                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.to(() => demopage());
+                              },
+                              icon: Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              )),
                         ),
                       ),
                       5.heightBox,
@@ -239,10 +257,15 @@ class _AcountState extends State<Acount> {
                             size: 40,
                           ),
                           title: Text('About us'),
-                          trailing: Icon(
-                            Icons.navigate_next_outlined,
-                            color: Colors.black,
-                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.to(() => demopage());
+                              },
+                              autofocus: true,
+                              icon: Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              )),
                         ),
                       ),
                     ],
