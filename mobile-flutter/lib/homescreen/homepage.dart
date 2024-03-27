@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:morph/Drawer/Drawer.dart';
 import 'package:morph/commonwidget/coursettitle/coursetitle.dart';
 import 'package:morph/const/color.dart';
+import 'package:morph/cousredetail/course.dart';
+import 'package:morph/cousredetail/videoplayer.dart';
 import 'package:morph/elementlist/imagelist.dart';
 import 'package:morph/elementlist/stringlist.dart';
 import 'package:morph/homescreen/profile.dart/account.dart';
@@ -108,7 +109,7 @@ class _HomepageState extends State<Homepage> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                Get.to(() => const drawer());
+                                Get.to(() => videoplayer());
                               },
                               child: Container(
                                 height: 170,

@@ -9,3 +9,5 @@ const Redcolor = Color.fromARGB(255, 210, 3, 3);
 const boxcolor = Color.fromARGB(255, 81, 97, 124);
 const backgrounghilghtcolor = Color.fromARGB(255, 3, 13, 22);
 const listcolor = Color.fromARGB(255, 68, 78, 104);
+const boxtilecolor = Color.fromARGB(255, 27, 28, 37);
+const subtextcolor = Color.fromARGB(255, 179, 179, 182);
