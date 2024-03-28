@@ -77,8 +77,9 @@ class _videoplayerState extends State<videoplayer> {
                           .fontFamily(semibold)
                           .color(subtexColor)
                           .make(),
-                      const SizedBox(width: 1),
-                      ratingbar(),
+                      const SizedBox(width: 80),
+                      ratingbar(20, 0.8, 5),
+                      const SizedBox(width: 80),
                       'Rs 1000'.text.color(Colors.amber).make(),
                     ],
                   ),
@@ -101,7 +102,7 @@ class _videoplayerState extends State<videoplayer> {
                         Icons.language,
                         color: subtexColor,
                       ),
-                      'english'.text.size(14).color(subtexColor).make(),
+                      'English'.text.size(14).color(subtexColor).make(),
                       20.widthBox,
                       Container(
                         alignment: Alignment.center,

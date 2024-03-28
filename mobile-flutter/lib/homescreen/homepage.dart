@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/commonwidget/coursettitle/coursetitle.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/cousredetail/course.dart';
 import 'package:morph/cousredetail/videoplayer.dart';
 import 'package:morph/elementlist/imagelist.dart';
+import 'package:morph/elementlist/pricelist.dart';
+import 'package:morph/elementlist/ratingvaluelist.dart';
 import 'package:morph/elementlist/stringlist.dart';
 import 'package:morph/homescreen/profile.dart/account.dart';
 import 'package:morph/searcheswdget/search.dart';
@@ -112,13 +113,16 @@ class _HomepageState extends State<Homepage> {
                                 Get.to(() => videoplayer());
                               },
                               child: Container(
-                                height: 170,
+                                height: 250,
                                 width: 178,
                                 padding: const EdgeInsets.all(7),
                                 child: Column(children: [
                                   featurelistRow(
-                                      image: courselist[index],
-                                      name: coursedetail[index])
+                                    image: courselist[index],
+                                    name: coursedetail[index],
+                                    price: pricelist[index],
+                                    countstar: ratingcount[index],
+                                  ),
                                 ]).box.make(),
                               ),
                             ),
@@ -127,7 +131,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
-                  //yaha vanda muni ko chai paxi milaune hai ta
+                  20.heightBox,
                   Align(
                     child: "Top courses"
                         .text
@@ -153,16 +157,19 @@ class _HomepageState extends State<Homepage> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                Get.to(() => const drawer());
+                                Get.to(() => videoplayer());
                               },
                               child: Container(
-                                height: 170,
+                                height: 250,
                                 width: 178,
                                 padding: const EdgeInsets.all(7),
                                 child: Column(children: [
                                   featurelistRow(
-                                      image: courselist[index],
-                                      name: coursedetail[index])
+                                    image: courselist[index],
+                                    name: coursedetail[index],
+                                    price: pricelist[index],
+                                    countstar: ratingcount[index],
+                                  ),
                                 ]).box.make(),
                               ),
                             ),
@@ -171,6 +178,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
+                  20.heightBox,
                   Align(
                     child: "Top courses"
                         .text
@@ -196,16 +204,19 @@ class _HomepageState extends State<Homepage> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                Get.to(() => const drawer());
+                                Get.to(() => videoplayer());
                               },
                               child: Container(
-                                height: 170,
+                                height: 250,
                                 width: 178,
                                 padding: const EdgeInsets.all(7),
                                 child: Column(children: [
                                   featurelistRow(
-                                      image: courselist[index],
-                                      name: coursedetail[index])
+                                    image: courselist[index],
+                                    name: coursedetail[index],
+                                    price: pricelist[index],
+                                    countstar: ratingcount[index],
+                                  ),
                                 ]).box.make(),
                               ),
                             ),
