@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
     ];
 
     var itembody = [
-      Asignmnet(),
+      Asignmentpage(),
       Homepage(),
       Search(),
     ];
