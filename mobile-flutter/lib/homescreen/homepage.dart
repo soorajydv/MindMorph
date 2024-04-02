@@ -7,7 +7,7 @@ import 'package:morph/elementlist/imagelist.dart';
 import 'package:morph/elementlist/pricelist.dart';
 import 'package:morph/elementlist/ratingvaluelist.dart';
 import 'package:morph/elementlist/stringlist.dart';
-import 'package:morph/homescreen/Buyandcartscreeen/buyscreen.dart';
+import 'package:morph/homescreen/cartscreen/cartscreen.dart';
 import 'package:morph/homescreen/profile.dart/account.dart';
 import 'package:morph/searcheswdget/search.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -37,6 +37,7 @@ class _HomepageState extends State<Homepage> {
                   border: Border.all(
                     color: themecolor,
                   )),
+              height: 50,
               child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -50,7 +51,7 @@ class _HomepageState extends State<Homepage> {
                     IconButton(
                       color: titlecolor,
                       onPressed: () {
-                        Get.to(() => const Buypage());
+                        Get.to(() => Cartpage());
                       },
                       icon: const Icon(Icons.shopping_cart),
                     ),
@@ -62,7 +63,6 @@ class _HomepageState extends State<Homepage> {
                       icon: const Icon(Icons.search),
                     ),
                   ]),
-              height: 50,
             ),
             40.heightBox,
             Expanded(

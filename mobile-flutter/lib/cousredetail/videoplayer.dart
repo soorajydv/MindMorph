@@ -413,7 +413,7 @@ class _videoplayerState extends State<videoplayer> {
                             // ignore: sort_child_properties_last
                             child: Align(
                               alignment: Alignment.center,
-                              child: 'Cart'
+                              child: 'Add to Cart'
                                   .text
                                   .fontFamily(regular)
                                   .color(Colors.white)

@@ -70,7 +70,7 @@ class _AsignmnetState extends State<Asignmentpage> {
                         Icon(
                           size: 36,
                           Icons.school,
-                          color: Colors.amber,
+                          color: Color.fromARGB(255, 86, 119, 142),
                         )
                       ],
                     ),
