@@ -47,7 +47,7 @@ class _HomepageState extends State<Homepage> {
                           Get.to(() => const Acount());
                         },
                         icon: const Icon(Icons.person_rounded)),
-                    220.widthBox,
+                    180.widthBox,
                     IconButton(
                       color: titlecolor,
                       onPressed: () {

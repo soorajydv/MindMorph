@@ -79,7 +79,7 @@ class _videoplayerState extends State<videoplayer> {
                           .make(),
                       const SizedBox(width: 80),
                       ratingbar(20, 0.8, 5),
-                      const SizedBox(width: 80),
+                      const SizedBox(width: 60),
                       'Rs 1000'.text.color(Colors.amber).make(),
                     ],
                   ),
@@ -253,7 +253,7 @@ class _videoplayerState extends State<videoplayer> {
                                                         const SizedBox(
                                                             width:
                                                                 5), // Add some space between the two texts
-                                                        'Flutter Course Basic'
+                                                        'Flutter Course'
                                                             .text // Second text widget
                                                             .size(12)
                                                             .color(FeatureColor)
@@ -266,6 +266,9 @@ class _videoplayerState extends State<videoplayer> {
                                                   Align(
                                                     alignment: Alignment.center,
                                                     child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         55.widthBox,
                                                         'Price:'
@@ -543,11 +546,11 @@ class _videoplayerState extends State<videoplayer> {
 
   void initializevideoplayer() {
     CachedVideoPlayerController _CachedVideoPlayerController;
-    _CachedVideoPlayerController =
-        CachedVideoPlayerController.asset('assets/videos/clip.mp4')
-          ..initialize().then((value) {
-            setState(() {});
-          });
+    _CachedVideoPlayerController = CachedVideoPlayerController.network(
+        'https://www.w3schools.com/html/mov_bbb.mp4')
+      ..initialize().then((value) {
+        setState(() {});
+      });
     _customVideoPlayerController = CustomVideoPlayerController(
         context: context, videoPlayerController: _CachedVideoPlayerController);
   }

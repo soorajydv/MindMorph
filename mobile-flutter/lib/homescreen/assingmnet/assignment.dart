@@ -59,7 +59,7 @@ class _AsignmnetState extends State<Asignmentpage> {
                             ),
                           ),
                         ),
-                        20.widthBox,
+                        15.widthBox,
                         'Ram prasad sha'
                             .text
                             .size(20)
@@ -147,7 +147,7 @@ class _AsignmnetState extends State<Asignmentpage> {
                               .color(titlecolor)
                               .fontFamily(bold)
                               .make(),
-                          150.widthBox,
+                          130.widthBox,
                           'Grade-'
                               .text
                               .size(18)
