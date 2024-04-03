@@ -1,0 +1,23 @@
+npx sequelize-cli model:generate --name User --attributes fullName:string,lastName:string,email:string,password:string,role:string,avatar:string
+
+fullName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      password: DataTypes.STRING,
+      role: DataTypes.TINYINT, // 0-> Student, 1-> Instructor, 3-> Admin
+      avatar
+
+   ### Seeding
+   **Creating First Seed**
+    ```shell
+    npx sequelize-cli seed:generate --name user
+    ```
+    **Running Seed**
+    ```shell
+    npx sequelize-cli db:seed:all
+    ```
