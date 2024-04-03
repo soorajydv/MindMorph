@@ -28,9 +28,9 @@ class Home extends StatelessWidget {
     ];
 
     var itembody = [
-      Asignmnet(),
-      Homepage(),
-      Search(),
+      const Asignmnet(),
+      const Homepage(),
+      const Search(),
     ];
     return Scaffold(
       body: Column(
@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           currentIndex: controller.currentnavIndex.value,
-          selectedItemColor: Color.fromARGB(255, 253, 252, 255),
+          selectedItemColor: const Color.fromARGB(255, 253, 252, 255),
           unselectedItemColor: titlecolor,
           backgroundColor: listcolor,
           type: BottomNavigationBarType.fixed,
