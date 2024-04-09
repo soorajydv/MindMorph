@@ -56,7 +56,7 @@ class _AcountState extends State<Acount> {
                     height: 170,
                     width: 350,
                     decoration: BoxDecoration(
-                        color: listcolor,
+                        color: backgrounghilghtcolor,
                         borderRadius: BorderRadius.circular(40)),
                     child: Column(
                       children: [
@@ -71,19 +71,19 @@ class _AcountState extends State<Acount> {
                                     .size(20)
                                     .align(TextAlign.left)
                                     .bold
+                                    .color(titlecolor)
                                     .make(),
                                 "sobin@gmail.com"
                                     .text
                                     .size(15)
                                     .semiBold
                                     .align(TextAlign.left)
-                                    .color(
-                                        const Color.fromARGB(255, 97, 93, 93))
+                                    .color(Color.fromARGB(255, 88, 68, 132))
                                     .make(),
                                 20.heightBox,
                                 const Icon(
                                   FontAwesomeIcons.userGraduate,
-                                  color: Color.fromARGB(255, 162, 155, 155),
+                                  color: Color.fromARGB(255, 173, 178, 209),
                                 )
                               ],
                             ),
@@ -91,8 +91,17 @@ class _AcountState extends State<Acount> {
                             Column(children: [
                               Container(
                                 alignment: Alignment.centerRight,
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: const Color.fromARGB(
+                                              255, 249, 249, 249)
+                                          .withOpacity(0.2),
+                                      blurRadius: 7,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
                                 ),
                                 child: ClipOval(
                                   child: Image.network(
@@ -111,7 +120,7 @@ class _AcountState extends State<Acount> {
                                       icon: const Icon(
                                         FontAwesomeIcons.exchangeAlt,
                                         color:
-                                            Color.fromARGB(31, 244, 232, 232),
+                                            Color.fromARGB(255, 173, 178, 209),
                                         size: 20,
                                       ))
                                 ],
@@ -146,17 +155,20 @@ class _AcountState extends State<Acount> {
                         child: ListTile(
                           leading: Icon(
                             Icons.person,
-                            color: Color.fromARGB(196, 69, 150, 161),
+                            color: Color.fromARGB(255, 2, 91, 154),
                             size: 30,
                           ),
-                          title: Text('Personal Information'),
+                          title: Text(
+                            'Personal Information',
+                            style: TextStyle(color: titlecolor),
+                          ),
                           trailing: IconButton(
                               onPressed: () {
                                 Get.to(() => demopage());
                               },
                               icon: Icon(
                                 Icons.navigate_next,
-                                color: Colors.black,
+                                color: titlecolor,
                               )),
                         ),
                       ),
@@ -173,17 +185,20 @@ class _AcountState extends State<Acount> {
                         child: ListTile(
                           leading: const Icon(
                             FontAwesomeIcons.bookOpen,
-                            color: Color.fromARGB(162, 22, 49, 58),
+                            color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: const Text('Book and Notes'),
+                          title: const Text(
+                            'Book and Notes',
+                            style: TextStyle(color: titlecolor),
+                          ),
                           trailing: IconButton(
                               onPressed: () {
                                 Get.to(() => demopage());
                               },
                               icon: Icon(
                                 Icons.navigate_next,
-                                color: Colors.black,
+                                color: titlecolor,
                               )),
                         ),
                       ),
@@ -200,17 +215,20 @@ class _AcountState extends State<Acount> {
                         child: ListTile(
                           leading: Icon(
                             Icons.assessment,
-                            color: Color.fromARGB(255, 175, 115, 97),
+                            color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: Text('Grade'),
+                          title: Text(
+                            'Grade',
+                            style: TextStyle(color: titlecolor),
+                          ),
                           trailing: IconButton(
                               onPressed: () {
                                 Get.to(() => demopage());
                               },
                               icon: Icon(
                                 Icons.navigate_next,
-                                color: Colors.black,
+                                color: titlecolor,
                               )),
                         ),
                       ),
@@ -227,17 +245,20 @@ class _AcountState extends State<Acount> {
                         child: ListTile(
                           leading: Icon(
                             Icons.settings,
-                            color: Color.fromARGB(255, 29, 8, 68),
+                            color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: Text('Setting & Privacy'),
+                          title: Text(
+                            'Setting & Privacy',
+                            style: TextStyle(color: titlecolor),
+                          ),
                           trailing: IconButton(
                               onPressed: () {
                                 Get.to(() => demopage());
                               },
                               icon: Icon(
                                 Icons.navigate_next,
-                                color: Colors.black,
+                                color: titlecolor,
                               )),
                         ),
                       ),
@@ -253,10 +274,13 @@ class _AcountState extends State<Acount> {
                         child: ListTile(
                           leading: Icon(
                             FontAwesomeIcons.infoCircle,
-                            color: Color.fromARGB(255, 122, 121, 121),
+                            color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: Text('About us'),
+                          title: Text(
+                            'About us',
+                            style: TextStyle(color: titlecolor),
+                          ),
                           trailing: IconButton(
                               onPressed: () {
                                 Get.to(() => demopage());
@@ -264,7 +288,7 @@ class _AcountState extends State<Acount> {
                               autofocus: true,
                               icon: Icon(
                                 Icons.navigate_next,
-                                color: Colors.black,
+                                color: titlecolor,
                               )),
                         ),
                       ),

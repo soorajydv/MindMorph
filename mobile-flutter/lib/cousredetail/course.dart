@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:morph/Drawer/firstscreen.dart';
-import 'package:morph/Drawer/secondDraw.dart';
+import 'package:morph/cousredetail/firstscreen.dart';
+import 'package:morph/cousredetail/secondDraw.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class drawer extends StatelessWidget {
@@ -35,7 +35,7 @@ class drawer extends StatelessWidget {
                 ),
               ),
               Buildmenuitem(
-                text: 'sobin',
+                text: 'sobin Rai',
                 icon: Icons.abc,
                 OnClicked: () => selecteditem(context, 0),
               ).box.make(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/Controller/homecontroller.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/homescreen/assignment.dart';
+import 'package:morph/homescreen/assingmnet/asignmentlist.dart';
 import 'package:morph/homescreen/homepage.dart';
 import 'package:morph/homescreen/searchpage.dart';
 
@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
     ];
 
     var itembody = [
-      Asignmnet(),
+      assignmentlist(),
       Homepage(),
       Search(),
     ];
@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
           currentIndex: controller.currentnavIndex.value,
           selectedItemColor: Color.fromARGB(255, 253, 252, 255),
           unselectedItemColor: titlecolor,
-          backgroundColor: listcolor,
+          backgroundColor: boxcolor,
           type: BottomNavigationBarType.fixed,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           items: navigitem,

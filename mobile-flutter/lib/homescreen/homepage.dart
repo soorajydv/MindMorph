@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:morph/Drawer/Drawer.dart';
 import 'package:morph/commonwidget/coursettitle/coursetitle.dart';
 import 'package:morph/const/color.dart';
+import 'package:morph/cousredetail/videoplayer.dart';
 import 'package:morph/elementlist/imagelist.dart';
+import 'package:morph/elementlist/pricelist.dart';
+import 'package:morph/elementlist/ratingvaluelist.dart';
 import 'package:morph/elementlist/stringlist.dart';
+import 'package:morph/homescreen/cartscreen/cartscreen.dart';
 import 'package:morph/homescreen/profile.dart/account.dart';
 import 'package:morph/searcheswdget/search.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -34,8 +37,9 @@ class _HomepageState extends State<Homepage> {
                   border: Border.all(
                     color: themecolor,
                   )),
+              height: 50,
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                         color: titlecolor,
@@ -43,15 +47,22 @@ class _HomepageState extends State<Homepage> {
                           Get.to(() => const Acount());
                         },
                         icon: const Icon(Icons.person_rounded)),
+                    180.widthBox,
+                    IconButton(
+                      color: titlecolor,
+                      onPressed: () {
+                        Get.to(() => Cartpage());
+                      },
+                      icon: const Icon(Icons.shopping_cart),
+                    ),
                     IconButton(
                       color: titlecolor,
                       onPressed: () {
                         Get.to(() => const search());
                       },
-                      icon: const Icon(Icons.shopping_cart),
-                    )
+                      icon: const Icon(Icons.search),
+                    ),
                   ]),
-              height: 50,
             ),
             40.heightBox,
             Expanded(
@@ -108,16 +119,19 @@ class _HomepageState extends State<Homepage> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                Get.to(() => const drawer());
+                                Get.to(() => videoplayer());
                               },
                               child: Container(
-                                height: 170,
+                                height: 250,
                                 width: 178,
                                 padding: const EdgeInsets.all(7),
                                 child: Column(children: [
                                   featurelistRow(
-                                      image: courselist[index],
-                                      name: coursedetail[index])
+                                    image: courselist[index],
+                                    name: coursedetail[index],
+                                    price: pricelist[index],
+                                    countstar: ratingcount[index],
+                                  ),
                                 ]).box.make(),
                               ),
                             ),
@@ -126,7 +140,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
-                  //yaha vanda muni ko chai paxi milaune hai ta
+                  20.heightBox,
                   Align(
                     child: "Top courses"
                         .text
@@ -152,16 +166,19 @@ class _HomepageState extends State<Homepage> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                Get.to(() => const drawer());
+                                Get.to(() => videoplayer());
                               },
                               child: Container(
-                                height: 170,
+                                height: 250,
                                 width: 178,
                                 padding: const EdgeInsets.all(7),
                                 child: Column(children: [
                                   featurelistRow(
-                                      image: courselist[index],
-                                      name: coursedetail[index])
+                                    image: courselist[index],
+                                    name: coursedetail[index],
+                                    price: pricelist[index],
+                                    countstar: ratingcount[index],
+                                  ),
                                 ]).box.make(),
                               ),
                             ),
@@ -170,6 +187,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                     ),
                   ),
+                  20.heightBox,
                   Align(
                     child: "Top courses"
                         .text
@@ -195,16 +213,19 @@ class _HomepageState extends State<Homepage> {
                             3,
                             (index) => GestureDetector(
                               onTap: () {
-                                Get.to(() => const drawer());
+                                Get.to(() => videoplayer());
                               },
                               child: Container(
-                                height: 170,
+                                height: 250,
                                 width: 178,
                                 padding: const EdgeInsets.all(7),
                                 child: Column(children: [
                                   featurelistRow(
-                                      image: courselist[index],
-                                      name: coursedetail[index])
+                                    image: courselist[index],
+                                    name: coursedetail[index],
+                                    price: pricelist[index],
+                                    countstar: ratingcount[index],
+                                  ),
                                 ]).box.make(),
                               ),
                             ),

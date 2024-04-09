@@ -9,7 +9,7 @@ class SecondDraw extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(50),
       color: const Color.fromARGB(255, 91, 87, 87),
-      child: 'sobin'.text.bold.white.align(TextAlign.center).make(),
+      child: 'sobin rai'.text.bold.white.align(TextAlign.center).make(),
     );
   }
 }
