@@ -1,4 +1,5 @@
 node_modules/
 secret/
-development.env
 .env
+media/
+config/

@@ -95,20 +95,20 @@ class _HomepageState extends State<Homepage> {
                   ),
                   20.heightBox,
                   Align(
+                    alignment: Alignment.topLeft,
                     child: "Top courses"
                         .text
                         .color(FeatureColor)
                         .bold
                         .size(25)
                         .make(),
-                    alignment: Alignment.topLeft,
                   ),
                   5.heightBox,
                   Card(
                     color: backgrounghilghtcolor,
                     shadowColor: const Color.fromARGB(255, 17, 17, 16),
                     clipBehavior: Clip.hardEdge,
-                    child: Container(
+                    child: SizedBox(
                       height: 170,
                       width: 500,
                       child: SingleChildScrollView(
@@ -142,20 +142,20 @@ class _HomepageState extends State<Homepage> {
                   ),
                   20.heightBox,
                   Align(
+                    alignment: Alignment.topLeft,
                     child: "Top courses"
                         .text
                         .color(FeatureColor)
                         .bold
                         .size(25)
                         .make(),
-                    alignment: Alignment.topLeft,
                   ),
                   5.heightBox,
                   Card(
                     color: backgrounghilghtcolor,
                     shadowColor: const Color.fromARGB(255, 17, 17, 16),
                     clipBehavior: Clip.hardEdge,
-                    child: Container(
+                    child: SizedBox(
                       height: 170,
                       width: 500,
                       child: SingleChildScrollView(
@@ -189,20 +189,20 @@ class _HomepageState extends State<Homepage> {
                   ),
                   20.heightBox,
                   Align(
+                    alignment: Alignment.topLeft,
                     child: "Top courses"
                         .text
                         .color(FeatureColor)
                         .bold
                         .size(25)
                         .make(),
-                    alignment: Alignment.topLeft,
                   ),
                   5.heightBox,
                   Card(
                     color: backgrounghilghtcolor,
                     shadowColor: const Color.fromARGB(255, 17, 17, 16),
                     clipBehavior: Clip.hardEdge,
-                    child: Container(
+                    child: SizedBox(
                       height: 170,
                       width: 500,
                       child: SingleChildScrollView(
