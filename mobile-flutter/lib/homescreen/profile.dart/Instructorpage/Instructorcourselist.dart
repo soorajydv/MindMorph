@@ -1,119 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/homescreen/assingmnet/assignment.dart';
-import 'package:morph/homescreen/assingmnet/completedasiignment.dart';
+import 'package:morph/cousredetail/videoplayer.dart';
+import 'package:morph/homescreen/profile.dart/Instructorpage/addcoursepage.dart';
 
-class User {
+class Instructor {
   final String coursename;
-  final String assignment;
-  final String UrlAvatar;
-  User(
-      {required this.UrlAvatar,
-      required this.assignment,
-      required this.coursename});
+  final String Urlthumbcourse;
+  final String price;
+  Instructor({
+    required this.coursename,
+    required this.price,
+    required this.Urlthumbcourse,
+  });
 }
 
-class Instructorcourselist extends StatelessWidget {
-  Instructorcourselist({super.key}) {
-    // TODO: implement assignmentlist
-    throw UnimplementedError();
-  }
-  List<User> user = [
-    User(
-        UrlAvatar:
-            'https://i.pinimg.com/736x/cf/0b/74/cf0b7475f26c043b55fe50cfb98c15d5.jpg',
-        assignment: 'Assignment 1',
-        coursename: 'fllutter basic'),
-    User(
-        UrlAvatar:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQgWejE2_K0DKRYUP09A1nuMu6CuIs3oULFak4QA4YLA&s',
-        assignment: 'Assignment 2',
-        coursename: 'java full course'),
-    User(
-        UrlAvatar:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg/1200px-Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg',
-        assignment: 'Assignment 3',
-        coursename: 'Devops'),
-    User(
-        UrlAvatar:
-            'https://i.pinimg.com/736x/cf/0b/74/cf0b7475f26c043b55fe50cfb98c15d5.jpg',
-        assignment: 'Assignment 1',
-        coursename: 'fllutter basic'),
-    User(
-        UrlAvatar:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQgWejE2_K0DKRYUP09A1nuMu6CuIs3oULFak4QA4YLA&s',
-        assignment: 'Assignment 2',
-        coursename: 'java full course'),
-    User(
-        UrlAvatar:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg/1200px-Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg',
-        assignment: 'Assignment 3',
-        coursename: 'Devops'),
+class listInstructorcourse extends StatelessWidget {
+  listInstructorcourse({super.key});
+  List<Instructor> instructor = [
+    Instructor(
+        coursename: "Flutter Basic Course",
+        price: "Rs.500",
+        Urlthumbcourse:
+            'https://www.excelptp.com/wp-content/uploads/2023/03/Flutter-Development-Course.jpg'),
+    Instructor(
+        coursename: "Javacourse",
+        price: "RS.2600",
+        Urlthumbcourse:
+            'https://www.excelptp.com/wp-content/uploads/2023/03/Flutter-Development-Course.jpg'),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
-        shadowColor: Colors.white,
-        foregroundColor: Colors.red,
-        backgroundColor: themecolor,
+        centerTitle: true,
+        title: const Text('My Course',
+            style: TextStyle(color: FeatureColor, fontSize: 20)),
+        iconTheme: const IconThemeData(color: titlecolor),
+        backgroundColor: const Color.fromARGB(255, 8, 27, 42),
         actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: boxtilecolor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(color: titlecolor))),
-            onPressed: () {
-              Get.to(() => Completedassignmentlist());
-            },
-            child: Text(
-              'Done',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
+          IconButton(
+              onPressed: () {
+                Get.to(() => AddCoursePage());
+              },
+              icon: const Icon(Icons.add))
         ],
-        title: const Text(
-          'Assignments',
-          style: TextStyle(color: titlecolor),
-        ),
       ),
       body: Container(
-        color: backgrounghilghtcolor,
-        child: ListView.builder(
-            itemCount: user.length,
-            itemBuilder: ((context, index) {
-              final users = user[index];
-              return Card(
-                color: boxtilecolor,
-                semanticContainer: true,
-                child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-                  leading: CircleAvatar(
-                    radius: 28,
-                    backgroundImage: NetworkImage(users.UrlAvatar),
-                  ),
-                  title: Text(
-                    users.coursename,
-                    style: TextStyle(color: titlecolor),
-                  ),
-                  subtitle: Text(
-                    users.assignment,
-                    style: TextStyle(color: FeatureColor),
-                  ),
-                  trailing: Icon(Icons.arrow_forward_ios),
-                  onTap: () {
-                    Get.to(() => Asignmentpage());
-                  },
-                ),
-              );
-            })),
-      ),
+          color: themecolor,
+          child: ListView.builder(
+              itemCount: instructor.length,
+              itemBuilder: ((BuildContext context, Index) {
+                final instructors = instructor[Index];
+                return Container(
+                    height: 100,
+                    child: Card(
+                        elevation: 50,
+                        color: boxtilecolor,
+                        semanticContainer: true,
+                        child: ListTile(
+                          leading: Container(
+                            decoration: const BoxDecoration(),
+                            width: 100,
+                            height: 200,
+                            child: Image.network(
+                              instructors.Urlthumbcourse,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                          title: Text(
+                            instructors.coursename,
+                            style: const TextStyle(
+                                color: titlecolor, fontSize: 18),
+                          ),
+                          subtitle: Text(
+                            instructors.price,
+                            style: const TextStyle(
+                                color: Colors.amber, fontSize: 14),
+                          ),
+                          trailing: IconButton(
+                              onPressed: () {
+                                Get.to(() => const videoplayer());
+                              },
+                              icon: const Icon(Icons.arrow_forward)),
+                        )));
+              }))),
     );
   }
 }

@@ -165,7 +165,7 @@ class _InstrcutoraccountState extends State<Instrcutoraccount> {
                           ),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => Instructorcourselist());
+                                Get.to(() => listInstructorcourse());
                               },
                               icon: Icon(
                                 Icons.navigate_next,
