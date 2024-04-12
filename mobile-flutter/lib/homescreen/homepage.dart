@@ -39,7 +39,7 @@ class _HomepageState extends State<Homepage> {
                   )),
               height: 50,
               child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                         color: titlecolor,
