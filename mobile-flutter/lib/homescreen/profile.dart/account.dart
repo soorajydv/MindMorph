@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
 import 'package:morph/homescreen/barnevigation.dart';
+import 'package:morph/homescreen/profile.dart/Instructorpage/instrcutorAc.dart';
 import 'package:morph/homescreen/profile.dart/acountdetaildemo.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -116,7 +117,14 @@ class _AcountState extends State<Acount> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Instrcutoraccount()),
+                                        );
+                                      },
                                       icon: const Icon(
                                         FontAwesomeIcons.exchangeAlt,
                                         color:
