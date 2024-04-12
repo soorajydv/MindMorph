@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 60, 56, 66)),
         useMaterial3: true,
       ),
-      home: Instrcutoraccount(),
+      home: const SplashScreen(),
     );
   }
 }

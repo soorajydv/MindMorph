@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const {loginController, signupController} = require('../controller/auth')
 
+const signup = require('../controller/auth/signup');
+const login = require('../controller/auth/login');
+const upload = require('../middleware/fileUpload');
 
-router.post('/login', loginController);
-router.post('/signup', signupController);
-//router.post('/course', courseController);
-
+router.post('/signup', upload('userAvatar', 'avatar'), signup);
+router.post('/login', login);
 
 module.exports = router;
- 

@@ -153,20 +153,17 @@ class _AcountState extends State<Acount> {
                         ),
                         alignment: Alignment.center,
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.person,
                             color: Color.fromARGB(255, 2, 91, 154),
                             size: 30,
                           ),
-                          title: Text(
-                            'Personal Information',
-                            style: TextStyle(color: titlecolor),
-                          ),
+                          title: const Text('Personal Information'),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => demopage());
+                                Get.to(() => const demopage());
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.navigate_next,
                                 color: titlecolor,
                               )),
@@ -174,7 +171,7 @@ class _AcountState extends State<Acount> {
                       ),
                       5.heightBox,
                       Container(
-                        padding: EdgeInsets.all(2),
+                        padding: const EdgeInsets.all(2),
                         height: 70,
                         width: 80,
                         decoration: BoxDecoration(
@@ -194,9 +191,9 @@ class _AcountState extends State<Acount> {
                           ),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => demopage());
+                                Get.to(() => const demopage());
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.navigate_next,
                                 color: titlecolor,
                               )),
@@ -213,20 +210,17 @@ class _AcountState extends State<Acount> {
                         ),
                         alignment: Alignment.center,
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.assessment,
                             color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: Text(
-                            'Grade',
-                            style: TextStyle(color: titlecolor),
-                          ),
+                          title: const Text('Grade'),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => demopage());
+                                Get.to(() => const demopage());
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.navigate_next,
                                 color: titlecolor,
                               )),
@@ -243,20 +237,17 @@ class _AcountState extends State<Acount> {
                         ),
                         alignment: Alignment.center,
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             Icons.settings,
                             color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: Text(
-                            'Setting & Privacy',
-                            style: TextStyle(color: titlecolor),
-                          ),
+                          title: const Text('Setting & Privacy'),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => demopage());
+                                Get.to(() => const demopage());
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.navigate_next,
                                 color: titlecolor,
                               )),
@@ -272,21 +263,18 @@ class _AcountState extends State<Acount> {
                         ),
                         alignment: Alignment.center,
                         child: ListTile(
-                          leading: Icon(
+                          leading: const Icon(
                             FontAwesomeIcons.infoCircle,
                             color: Color.fromARGB(255, 2, 91, 154),
                             size: 40,
                           ),
-                          title: Text(
-                            'About us',
-                            style: TextStyle(color: titlecolor),
-                          ),
+                          title: const Text('About us'),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => demopage());
+                                Get.to(() => const demopage());
                               },
                               autofocus: true,
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.navigate_next,
                                 color: titlecolor,
                               )),
