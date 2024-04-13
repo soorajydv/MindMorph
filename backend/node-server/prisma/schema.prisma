@@ -42,7 +42,7 @@ model User {
   oauthProvider OAuthProvider?
   // Foreign Keys
   socialHandle  SocialHandle?
-  course Course[]
+  course        Course[]
   courseReview  CourseReview[]
   qna           QnA[]
 }
@@ -73,39 +73,37 @@ model CourseCategory {
 }
 
 model Course {
-  id               Int           @id @default(autoincrement())
+  id               Int            @id @default(autoincrement())
   title            String
   courseCategory   CourseCategory @relation(fields: [courseCategoryId], references: [id])
-  courseCategoryId Int 
+  courseCategoryId Int
   description      String         @db.VarChar(1000)
   objective        String         @db.VarChar(1000)
   requirement      String         @db.VarChar(1000)
   syllabus         String         @db.VarChar(1000)
-   author     User   @relation(fields: [authorId], references: [id])
- authorId   Int
+  author           User           @relation(fields: [authorId], references: [id])
+  authorId         Int
   language         Language       @default(English)
   price            Float
   discountPercent  Float?
   rating           Float?
-  titleVideo  String?
-  ratingCount      Int @default(0)
-  enrollCount      Int @default(0)
+  titleVideo       String?
+  ratingCount      Int            @default(0)
+  enrollCount      Int            @default(0)
   thumbnail        String?
   subtitle         String?
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
-}
 
-// model CourseAuthor {
-//   id       Int    @id @default(autoincrement())
-//   user     User   @relation(fields: [userId], references: [id])
-//   userId   Int
-//   course   Course @relation(fields: [courseId], references: [ id])
-//   courseId Int
-// }
+  courseReview CourseReview[]
+
+  qna QnA[]
+}
 
 model CourseReview {
   id             Int      @id @default(autoincrement())
+  course         Course   @relation(fields: [courseId], references: [id])
+  courseId       Int
   user           User     @relation(fields: [userId], references: [id])
   userId         Int
   description    String   @db.VarChar(500)
@@ -118,6 +116,8 @@ model QnA {
   id            Int      @id @default(autoincrement())
   user          User     @relation(fields: [userId], references: [id])
   userId        Int
+  course        Course   @relation(fields: [courseId], references: [id])
+  courseId      Int
   title         String // No title for resply
   description   String   @db.VarChar(500)
   updatedAt     DateTime @updatedAt
