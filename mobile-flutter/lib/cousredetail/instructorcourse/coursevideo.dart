@@ -269,12 +269,6 @@ class _InstructpageState extends State<Instructpage> {
                       endIndent: 40,
                       indent: 40,
                     ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Add Assignment",
-                          style: TextStyle(color: Colors.amber),
-                        ))
                   ],
                 ),
               ),

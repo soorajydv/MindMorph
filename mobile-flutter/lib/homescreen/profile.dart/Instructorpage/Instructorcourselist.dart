@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/cousredetail/videoplayer.dart';
+import 'package:morph/cousredetail/instructorcourse/coursevideo.dart';
 import 'package:morph/homescreen/profile.dart/Instructorpage/addcoursepage.dart';
 
 class Instructor {
@@ -61,7 +61,7 @@ class listInstructorcourse extends StatelessWidget {
                         semanticContainer: true,
                         child: ListTile(
                           leading: Container(
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             width: 100,
                             height: 200,
                             child: Image.network(
@@ -81,7 +81,7 @@ class listInstructorcourse extends StatelessWidget {
                           ),
                           trailing: IconButton(
                               onPressed: () {
-                                Get.to(() => const videoplayer());
+                                Get.to(() => Instructpage());
                               },
                               icon: const Icon(Icons.arrow_forward)),
                         )));

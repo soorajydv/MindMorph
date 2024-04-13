@@ -4,6 +4,7 @@ import "package:get/get.dart";
 import "package:morph/const/color.dart";
 import "package:morph/homescreen/barnevigation.dart";
 import "package:morph/homescreen/profile.dart/Instructorpage/Instructorcourselist.dart";
+import "package:morph/homescreen/profile.dart/account.dart";
 import "package:velocity_x/velocity_x.dart";
 
 class Instrcutoraccount extends StatefulWidget {
@@ -117,7 +118,9 @@ class _InstrcutoraccountState extends State<Instrcutoraccount> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Get.to(() => Acount());
+                                      },
                                       icon: const Icon(
                                         FontAwesomeIcons.exchangeAlt,
                                         color:

@@ -44,7 +44,6 @@ class _AddCoursePageState extends State<AddCoursePage> {
         body: KeyboardVisibilityBuilder(
           builder: (context, iskeyboadvisible) {
             return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
               child: Container(
                 width: context.screenWidth,
                 height: context.screenHeight,
