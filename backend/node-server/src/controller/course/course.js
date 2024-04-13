@@ -1,66 +1,90 @@
-// const { date } = require('joi');
-const prisma = require('../../../prisma/prisma');
-const courseSchema = require('../../validation/course')
+const prisma = require("../../../prisma/prisma");
+const courseSchema = require("../../validation/course");
 
 // Create a new course
 const createCourse = async (req, res) => {
-    const { error, value } = courseSchema.course.validate(req.body);
-
-     // If Joi validation fails, send an error response
-  if (error) return res.status(400).json({ message: error.details[0].message });
-    
-  try {
-    // Insert a new user in the database using Prisma ORM
-    const thumbnailPath = req.file.path.replaceAll('\\', '/'); // For windwos device
-
-    await prisma.course.create({
-      data: { ...value, thumbnail: thumbnailPath}}
-    );
-    // Send a success response with the created user object
-    res.status(201).json({
-      message: 'Course Created',
-      data: { ...value, thumbnail: thumbnailPath, syllabus:JSON.parse(value.syllabus)},
+    const { error, value } = courseSchema.course.validate({
+        ...req.body,
+        thumbnail: req.file.path,
     });
-  } catch (e) {
-    console.error(e);
-    // const { status, message } = serverError.signupHandler(e);
-    return res.status(400).json({ message: 'Error Occured', error:e });
-  }
+
+    // If Joi validation fails, send an error response
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
+    try {
+        await prisma.course.create({
+            data: value,
+        });
+        // Send a success response with the created user object
+        res.status(201).json({
+            message: "Course Created",
+            data: { ...value, syllabus: JSON.parse(value.syllabus) },
+        });
+    } catch (e) {
+        console.error(e);
+        return res.status(400).json({ message: "Error Occured", error: e });
+    }
 };
 
 // Update an existing course
 const updateCourse = async (req, res) => {
-    const { id } = req.params;
-    const courseData = req.body;
+    const { error, value } = courseSchema.updateCourse.validate({
+        ...req.body,
+        id: req.params.id,
+    });
+
+    // If Joi validation fails, send an error response
+    if (error) return res.status(400).json({ message: error.details[0].message });
 
     try {
-        // Update the course
-        const updatedCourse = await prisma.course.update({
-            where: { id: parseInt(id) },
-            data: courseData,
+        await prisma.course.update({
+            where: {
+                id: value.id,
+            },
+            data: value,
         });
-
-        res.json(updatedCourse);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to update course' });
+        // Send a success response with the created user object
+        res.status(201).json({
+            message: "Course Updated",
+            data: value,
+        });
+    } catch (e) {
+        console.error(e);
+        return res
+            .status(400)
+            .json({ message: "Error Occured while updating course", error: e });
     }
 };
 
-// Delete an existing course
+// delete an existing course
 const deleteCourse = async (req, res) => {
-    const { id } = req.params;
+    const { error, value } = courseSchema.deleteCourse.validate({ id: req.params.id });
+
+    // If Joi validation fails, send an error response
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
+    // Check if a course with the  id exists
+    const course = await prisma.course.findFirst({
+        where: {
+            id: value.id,
+        },
+    });
+    if (!course)
+        return res.status(204).json({ message: "Course doesn't exists" });
 
     try {
-        // Delete the course
         await prisma.course.delete({
-            where: { id: parseInt(id) },
+            where: value,
         });
-
-        res.json({ message: 'Course deleted successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to delete course' });
+        // Send a delete response
+        res.status(202).json({
+            message: "Course Deleted",
+        });
+    } catch (e) {
+        console.error(e);
+        return res
+            .status(400)
+            .json({ message: "Error Occured while deleting course", error: e });
     }
 };
 
