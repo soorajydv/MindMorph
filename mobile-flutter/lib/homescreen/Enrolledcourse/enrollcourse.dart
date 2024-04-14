@@ -16,8 +16,8 @@ class User {
       required this.instructer});
 }
 
-class Cartpage extends StatelessWidget {
-  Cartpage({super.key});
+class Enrolledcourse extends StatelessWidget {
+  Enrolledcourse({super.key});
   List<User> user = [
     User(
       thumbnail:
@@ -55,10 +55,9 @@ class Cartpage extends StatelessWidget {
         iconTheme: const IconThemeData(color: FeatureColor),
         toolbarHeight: 80,
         shadowColor: Colors.white,
-        foregroundColor: Colors.red,
         backgroundColor: themecolor,
         title: const Text(
-          'My Cart List',
+          'My Courses',
           style: TextStyle(color: titlecolor),
         ),
       ),

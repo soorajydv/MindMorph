@@ -9,7 +9,7 @@ import 'package:morph/elementlist/ratingvaluelist.dart';
 import 'package:morph/elementlist/stringlist.dart';
 import 'package:morph/homescreen/cartscreen/cartscreen.dart';
 import 'package:morph/homescreen/profile.dart/account.dart';
-import 'package:morph/searcheswdget/search.dart';
+import 'package:morph/homescreen/searchpage.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class Homepage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _HomepageState extends State<Homepage> {
                   )),
               height: 50,
               child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
                         color: titlecolor,
@@ -58,7 +58,7 @@ class _HomepageState extends State<Homepage> {
                     IconButton(
                       color: titlecolor,
                       onPressed: () {
-                        Get.to(() => const search());
+                        Get.to(() => Search());
                       },
                       icon: const Icon(Icons.search),
                     ),
@@ -143,7 +143,7 @@ class _HomepageState extends State<Homepage> {
                   20.heightBox,
                   Align(
                     alignment: Alignment.topLeft,
-                    child: "Top courses"
+                    child: "Features course "
                         .text
                         .color(FeatureColor)
                         .bold
@@ -190,7 +190,7 @@ class _HomepageState extends State<Homepage> {
                   20.heightBox,
                   Align(
                     alignment: Alignment.topLeft,
-                    child: "Top courses"
+                    child: "Trending Course"
                         .text
                         .color(FeatureColor)
                         .bold

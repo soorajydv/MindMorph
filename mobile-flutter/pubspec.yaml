@@ -45,6 +45,9 @@ dependencies:
   comment_box: ^0.0.18
   flutter_rating_bar: ^4.0.1
   file_picker: ^7.0.2
+  flutter_keyboard_visibility: ^6.0.0
+ 
+  
 
 dev_dependencies:
   flutter_test:
