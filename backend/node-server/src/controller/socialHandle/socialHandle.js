@@ -1,57 +1,84 @@
 const prisma = require("../../../prisma/prisma");
 const socialSchema = require("../../validation/socialHandle");
 
-const insertSocialHandles = async (req, res) => {
-    const { id, ...socialHandles } = req.body; // Assuming user ID is available in req.body
+const createSocialHandles = async (req, res) => {
+    const { error, value } = socialSchema.socialHandleSchema.validate({
+        ...req.body,
+    });
+    console.log(value);
+    // If Joi validation fails, send an error response
+    if (error) return res.status(400).json({ message: error.details[0].message });
 
     try {
-        // If no social handles are provided, send an error response
-        if (Object.keys(socialHandles).length === 0) {
-            return res.status(400).json({ message: "Please provide at least one social handle" });
-        }
 
-        // Validate social handles
-        const { error, value } = socialSchema.validate(socialHandles);
-
-        // If Joi validation fails, send an error response
-        if (error) {
-            return res.status(400).json({ message: error.details[0].message });
-        }
-
-        // Fetch the user's existing social handles
-        const existingSocialHandles = await prisma.socialHandle.findUnique({
-            where: { userId: id }
+        // Social handle doesn't exist, create a new one
+        await prisma.socialHandle.create({
+            data: value
         });
-
-        // Loop through the validated social handles and update the database accordingly
-        const updatedSocialHandles = {};
-
-        Object.keys(value).forEach(key => {
-            if (value[key]) { // Check if the social handle exists
-                updatedSocialHandles[key] = value[key];
-            }
-        });
-
-        // Create or update each social handle individually
-        await Promise.all(Object.keys(updatedSocialHandles).map(async (key) => {
-            await prisma.socialHandle.upsert({
-                where: { userId: id },
-                update: { [key]: updatedSocialHandles[key] },
-                create: {
-                    userId: id,
-                    [key]: updatedSocialHandles[key]
-                }
-            });
-        }));
-
-        // Send a success response
-        res.status(201).json({
-            message: "Social handles inserted/updated",
-            data: updatedSocialHandles,
-        });
-    } catch (e) {
+        return res.status(201).json({ message: "created", socialHandle: value });
+    }
+    catch (e) {
         console.error(e);
-        return res.status(400).json({ message: "Error occurred while inserting/updating social handles", error: e });
+        return res.status(400).json({ message: "Error occurred while creating", error: e });
     }
 };
-module.exports = insertSocialHandles;
+
+const updateSocialHandles = async (req, res) => {
+    const { error, value } = socialSchema.socialHandleSchema.validate({
+        ...req.body
+    });
+    console.log(value);
+    // If Joi validation fails, send an error response
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
+    try {
+        const existinghandle = await prisma.socialHandle.findFirst({
+            where: {
+                userId: value.userId
+            }
+        })
+        if (!existinghandle) {
+            await prisma.socialHandle.update({
+                where: {
+                    userId: value.userId
+                },
+                data: value
+            });
+            return res.status(202).json({ message: "updated" });
+        } else {
+            return res.status(409).json({ message: "Social handles already exists" });
+        }
+    }
+    catch (e) {
+        console.error(e);
+        return res.status(400).json({ message: "Error occurred while updating", error: e });
+    }
+};
+
+const deleteSocialHandles = async (req, res) => {
+    const { error, value } = socialSchema.socialHandleSchema.validate({
+        ...req.body,
+        userId: req.params.userId
+    });
+    console.log(value);
+    // If Joi validation fails, send an error response
+    if (error) return res.status(400).json({ message: error.details[0].message });
+
+    try {
+
+        await prisma.socialHandle.delete({
+            where: {
+                userId: value.userId
+            },
+
+        });
+        return res.status(202).json({ message: "deleted", socialHandle: value });
+    }
+    catch (e) {
+        console.error(e);
+        return res.status(204).json({ message: "Error occurred while deleting", error: e });
+    }
+};
+
+
+module.exports = { createSocialHandles, updateSocialHandles, deleteSocialHandles };

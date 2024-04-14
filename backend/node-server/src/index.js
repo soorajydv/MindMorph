@@ -4,8 +4,8 @@ require('dotenv').config();
 //Import API Routers
 const authRouter = require('./router/auth');
 const home = require('./controller/home');
-const course = require('./router/course');
-const socialHandle = require('./router/socialHandle')
+const courseRouter = require('./router/course');
+const socialHandleRouter = require('./router/socialHandle')
 
 // Start Express App
 const bodyParser = require('body-parser');
@@ -19,8 +19,8 @@ app.use('/media', express.static('media'));
 // Use API Routers
 app.use('/', authRouter);
 app.use('/', home);
-app.use('/course', course);
-app.use('/', socialHandle);
+app.use('/course', courseRouter);
+app.use('/', socialHandleRouter);
 
 
 // Start Server

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const insertSocialHandles = require('../controller/socialHandle/socialHandle')
+const { createSocialHandles, updateSocialHandles, deleteSocialHandles } = require('../controller/socialHandle/socialHandle')
 
-router.patch('/socialHandle/:id', insertSocialHandles)
-// router.patch('/socialHandle', updateSocialHandle)
-// router.delete('/socialHandle', deleteSocialHandle)
+router.post('/socialHandle/', createSocialHandles)
+router.patch('/socialHandle/', updateSocialHandles)
+router.delete('/socialHandle/', deleteSocialHandles)
 
 
 module.exports = router;
