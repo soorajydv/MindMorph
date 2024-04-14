@@ -48,14 +48,14 @@ model User {
 }
 
 model SocialHandle {
-  id       Int    @id @default(autoincrement())
-  website  String @unique
-  twitter  String @unique
-  youtube  String @unique
-  linkdin  String @unique
-  facebook String @unique
-  user     User   @relation(fields: [userId], references: [id])
-  userId   Int    @unique
+  id       Int     @id @default(autoincrement())
+  website  String? @unique
+  twitter  String? @unique
+  youtube  String? @unique
+  linkdin  String? @unique
+  facebook String? @unique
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int     @unique
 }
 
 model CourseDomain {
