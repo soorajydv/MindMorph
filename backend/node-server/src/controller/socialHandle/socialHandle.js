@@ -15,7 +15,7 @@ const createSocialHandles = async (req, res) => {
         await prisma.socialHandle.create({
             data: value
         });
-        return res.status(201).json({ message: "created", socialHandle: value });
+        return res.status(201).json({ message: "created" });
     }
     catch (e) {
         console.error(e);
@@ -32,22 +32,16 @@ const updateSocialHandles = async (req, res) => {
     if (error) return res.status(400).json({ message: error.details[0].message });
 
     try {
-        const existinghandle = await prisma.socialHandle.findFirst({
+        const socialHandleUpdate = await prisma.socialHandle.update({
             where: {
                 userId: value.userId
-            }
+            },
+            data: value
+
         })
-        if (!existinghandle) {
-            await prisma.socialHandle.update({
-                where: {
-                    userId: value.userId
-                },
-                data: value
-            });
-            return res.status(202).json({ message: "updated" });
-        } else {
-            return res.status(409).json({ message: "Social handles already exists" });
-        }
+
+        return res.status(202).json({ message: "updated" });
+
     }
     catch (e) {
         console.error(e);
@@ -57,8 +51,7 @@ const updateSocialHandles = async (req, res) => {
 
 const deleteSocialHandles = async (req, res) => {
     const { error, value } = socialSchema.socialHandleSchema.validate({
-        ...req.body,
-        userId: req.params.userId
+        ...req.body
     });
     console.log(value);
     // If Joi validation fails, send an error response
