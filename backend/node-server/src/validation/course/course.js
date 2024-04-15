@@ -1,16 +1,5 @@
 const Joi = require('joi');
 
-const courseCategory = Joi.object({
-  name: Joi.string().min(10).max(100).required(),
-  courseDomainId: Joi.number().required(),
-  courseId: Joi.number().required(),
-});
-
-
-const courseDomain = Joi.object({
-  name: Joi.string().min(10).max(100).required()
-});
-
 const course = Joi.object({
   title: Joi.string().min(10).max(100).required(),
   courseCategoryId: Joi.number().required(),
@@ -50,4 +39,4 @@ const deleteCourse = Joi.object({
 });
 
 
-module.exports = { course, courseCategory, updateCourse, deleteCourse, courseDomain }
+module.exports = { course, updateCourse, deleteCourse }

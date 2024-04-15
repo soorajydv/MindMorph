@@ -1,5 +1,5 @@
 const prisma = require("../../../prisma/prisma");
-const courseSchema = require("../../validation/course");
+const courseSchema = require("../../validation/course/course");
 
 // Create a new course
 const createCourse = async (req, res) => {
