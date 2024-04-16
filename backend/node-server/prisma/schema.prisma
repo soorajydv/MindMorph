@@ -80,7 +80,7 @@ model Course {
   description      String         @db.VarChar(1000)
   objective        String         @db.VarChar(1000)
   requirement      String         @db.VarChar(1000)
-  syllabus         String         @db.VarChar(1000)
+  syllabus         String         @db.VarChar(4000)
   author           User           @relation(fields: [authorId], references: [id])
   authorId         Int
   language         Language       @default(English)
