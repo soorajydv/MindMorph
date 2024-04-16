@@ -62,6 +62,7 @@ class _InstrcutoraccountState extends State<Instrcutoraccount> {
                     child: Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -89,7 +90,6 @@ class _InstrcutoraccountState extends State<Instrcutoraccount> {
                                 )
                               ],
                             ),
-                            130.widthBox,
                             Column(children: [
                               Container(
                                 alignment: Alignment.centerRight,

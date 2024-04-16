@@ -195,13 +195,10 @@ class _AddCoursePageState extends State<AddCoursePage> {
                                 color: Color.fromARGB(255, 137, 165, 204)),
                             controller: _descriptionController,
                             decoration: const InputDecoration(
-                              // labelText: 'Description',
-                              // hintText: 'Enter your description here',
                               border: OutlineInputBorder(),
                             ),
-                            maxLines: 4, // Allows for multiple lines of text
+                            maxLines: 4,
                             keyboardType: TextInputType.multiline,
-                            // Other properties like controller, onChanged, etc.
                           )
                         ],
                       ),

@@ -1,9 +1,20 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:morph/commonwidget/ratingbar.dart';
 import 'package:morph/const/color.dart';
 import 'package:morph/const/fonts.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+class User {
+  final String sectionname;
+  final String length;
+
+  User({
+    required this.sectionname,
+    required this.length,
+  });
+}
 
 class videoplayer extends StatefulWidget {
   const videoplayer({super.key});
@@ -14,6 +25,13 @@ class videoplayer extends StatefulWidget {
 
 // ignore: camel_case_types
 class _videoplayerState extends State<videoplayer> {
+  List<User> user = [
+    User(sectionname: 'Introduction', length: '2:40'),
+    User(sectionname: 'Introduction', length: '2:40'),
+    User(sectionname: 'Introduction', length: '2:40'),
+    User(sectionname: 'Introduction', length: '2:40'),
+  ];
+  final ExpansionTileController controller = ExpansionTileController();
   late CustomVideoPlayerController _customVideoPlayerController;
   bool isvisible = true;
   String toggle = 'Showless';
@@ -153,50 +171,60 @@ class _videoplayerState extends State<videoplayer> {
                                 )),
                           ),
                           10.heightBox,
-                          Column(
-                            children: [
-                              '# Introduction of flutter '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                              10.heightBox,
-                              '# Crossplatform vs Native '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                              10.heightBox,
-                              '# Flutter Setup - Overviews '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                              10.heightBox,
-                              '# Crossplatform vs Native '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                              10.heightBox,
-                              '# Dart and its proporties '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                              10.heightBox,
-                              '# first flutter App '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                              10.heightBox,
-                              '# about this course '
-                                  .text
-                                  .color(subtexColor)
-                                  .size(16)
-                                  .make(),
-                            ],
+                          Expanded(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 250,
+                                  width: 350,
+                                  child: ExpansionTile(
+                                    controller: controller,
+                                    title: Text(
+                                      'ExpansionTile with explicit controller.',
+                                      style: TextStyle(color: Vx.amber100),
+                                    ),
+                                    children: <Widget>[
+                                      Container(
+                                        height: 130,
+                                        width: 500,
+                                        color: backgrounghilghtcolor,
+                                        child: ListView.builder(
+                                            itemCount: user.length,
+                                            itemBuilder: ((context, index) {
+                                              final users = user[index];
+                                              return Container(
+                                                height: 80,
+                                                color: boxtilecolor,
+                                                child: ListTile(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 20.0,
+                                                          vertical: 20.0),
+                                                  title: Text(
+                                                    users.sectionname,
+                                                    style: const TextStyle(
+                                                        color: titlecolor),
+                                                  ),
+                                                  subtitle: Text(
+                                                    users.length,
+                                                    style: const TextStyle(
+                                                        color: FeatureColor),
+                                                  ),
+                                                  trailing: const Icon(
+                                                      Icons.arrow_forward_ios),
+                                                  onTap: () {
+                                                    Get.to(() => videoplayer());
+                                                  },
+                                                ),
+                                              );
+                                            })),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -472,68 +500,123 @@ class _videoplayerState extends State<videoplayer> {
                           borderRadius: BorderRadius.circular(20),
                           color: boxtilecolor,
                         ),
-                        height: 350,
-                        width: 350,
+                        height: MediaQuery.of(context).size.height * 0.9,
+                        width: MediaQuery.of(context).size.height * 0.95,
                         child: Column(
-                          children: [],
+                          children: [
+                            20.heightBox,
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: boxtilecolor,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.height * 0.60,
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: "sobin rai "
+                                        .text
+                                        .color(Colors.amber)
+                                        .maxFontSize(20)
+                                        .make(),
+                                  ),
+                                  ratingbar(10, 8, 4),
+                                  5.heightBox,
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child:
+                                        "i recommend this course to every one who want really learn, i loved it.It describe all basic to pro level. "
+                                            .text
+                                            .color(FeatureColor)
+                                            .maxFontSize(20)
+                                            .make(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: FeatureColor,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: boxtilecolor,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.height * 0.60,
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: "Narayan Gautam "
+                                        .text
+                                        .color(Colors.amber)
+                                        .maxFontSize(20)
+                                        .make(),
+                                  ),
+                                  ratingbar(10, 8, 4),
+                                  5.heightBox,
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child:
+                                        "i recommend this course to every one who want really learn, i loved it.It describe all basic to pro level. "
+                                            .text
+                                            .color(FeatureColor)
+                                            .maxFontSize(20)
+                                            .make(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: FeatureColor,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: boxtilecolor,
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              width: MediaQuery.of(context).size.height * 0.60,
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child: "Suraj Kumar Yadav "
+                                        .text
+                                        .color(Colors.amber)
+                                        .maxFontSize(20)
+                                        .make(),
+                                  ),
+                                  ratingbar(10, 8, 4),
+                                  5.heightBox,
+                                  Align(
+                                    alignment: Alignment.topLeft,
+                                    child:
+                                        "i recommend this course to every one who want really learn, i loved it.It describe all basic to pro level. "
+                                            .text
+                                            .color(FeatureColor)
+                                            .maxFontSize(20)
+                                            .make(),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: FeatureColor,
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    // Row(
-                    //   children: [
-                    //     Align(
-                    //       alignment: Alignment.topLeft,
-                    //       child: TextButton(
-                    //         onPressed: () {
-                    //           setState(() {
-                    //             isvisible = !isvisible;
-                    //             toggle =
-                    //                 isvisible ? 'showless' : 'Description:-';
-                    //           });
-                    //         },
-                    //         style: ButtonStyle(
-                    //           side:
-                    //               MaterialStateProperty.resolveWith<BorderSide>(
-                    //             (Set<MaterialState> states) {
-                    //               return BorderSide(
-                    //                 color: const Color.fromARGB(
-                    //                     255, 255, 255, 255), // Border color
-                    //                 width: 1, // Border width
-                    //               );
-                    //             },
-                    //           ),
-                    //         ),
-                    //         child: Text(toggle,
-                    //             textAlign: TextAlign.start,
-                    //             style: TextStyle(
-                    //               fontFamily: regular,
-                    //               fontSize: 14,
-                    //               color: Colors.white,
-                    //             )),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-
-                    Visibility(
-                      visible: isvisible,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: boxtilecolor,
-                        ),
-                        height: 350,
-                        width: 350,
-                        child: Column(
-                          children: [],
-                        ),
-                      ),
-                    ),
-                    // 10.heightBox,
-                    // divider,
-                    // 10.heightBox,
-                    // 10.heightBox,
-                    // divider,
                   ],
                 ),
               ),

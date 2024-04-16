@@ -145,7 +145,7 @@ class _MCQcollectionState extends State<MCQcollection> {
             ),
             Row(
               children: [
-                250.widthBox,
+                200.widthBox,
                 GestureDetector(
                   onTap: () {},
                   child: Container(
