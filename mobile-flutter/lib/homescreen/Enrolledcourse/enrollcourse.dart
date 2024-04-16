@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/cousredetail/videoplayer.dart';
+import 'package:morph/homescreen/Enrolledcourse/playvideo.dart';
 
 class User {
   final String coursename;
@@ -105,7 +105,7 @@ class Enrolledcourse extends StatelessWidget {
                   ),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () {
-                    Get.to(() => videoplayer());
+                    Get.to(() => Playenrollcourse());
                   },
                 ),
               );
