@@ -63,7 +63,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               TextButton(
                                   onPressed: _selectFile,
@@ -71,10 +71,9 @@ class _AddCoursePageState extends State<AddCoursePage> {
                                     'Select Course File:',
                                     style: TextStyle(fontSize: 16),
                                   )),
-                              30.widthBox,
                               Container(
                                 height: 25,
-                                width: 150,
+                                width: 100,
                                 decoration: BoxDecoration(
                                     color:
                                         const Color.fromARGB(255, 80, 97, 134),
@@ -97,7 +96,7 @@ class _AddCoursePageState extends State<AddCoursePage> {
                               30.widthBox,
                               Container(
                                 height: 25,
-                                width: 150,
+                                width: 100,
                                 decoration: BoxDecoration(
                                     color:
                                         const Color.fromARGB(255, 80, 97, 134),
@@ -138,19 +137,6 @@ class _AddCoursePageState extends State<AddCoursePage> {
                             indent: 60,
                           ),
                           const SizedBox(height: 20),
-
-                          // ElevatedButton(
-                          //   style: ElevatedButton.styleFrom(
-                          //     backgroundColor: const Color.fromARGB(255, 86, 119, 142),
-                          //     elevation: 1,
-                          //     shape: RoundedRectangleBorder(
-                          //       borderRadius: BorderRadius.circular(10),
-                          //     ),
-                          //   ),
-                          //   onPressed: _selectFile,
-                          //   child: const Text('Select File',
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
                           TextFormField(
                             controller: _courseNameController,
                             decoration: const InputDecoration(
