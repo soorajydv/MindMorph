@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { loginCredential } = require('../../validation/auth');
 const prisma = require('../../../prisma/prisma');
 
@@ -12,6 +13,7 @@ module.exports = async (req, res) => {
       email: value.email,
     },
   });
+
   if (!user) return res.status(400).json({ message: "Email doesn't exists" });
 
   // Now user with email exist so matching password
@@ -20,7 +22,31 @@ module.exports = async (req, res) => {
     return res.status(400).json({ message: 'Wrong Password' });
 
   // Both email & password are correct, now login user and send token as response
-  res
-    .status(200)
-    .json({ message: 'Login Success', token: '8b2b42bc74444sg4238nc3c24' });
+  // const token = jwt.sign({ userId: user._id }, 'your-secret-key', {
+  //   expiresIn: '1h',
+  //   });
+  // console.log('Value: ', value);
+  jwt.sign(
+    user,
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: process.env.JWT_EXPIRES_IN },
+    function (err, token) {
+      if (err) {
+        console.log('Error: ', err);
+        return res
+          .status(400)
+          .json({ message: 'failed to Generate token', error: err });
+      }
+      const userData = {
+        fullName: user.fullName,
+        email: user.email,
+        userId: user.id,
+        avatar: user.avatar,
+        role: user.role,
+      };
+      return res
+        .status(200)
+        .json({ message: 'Login Success', token, userData });
+    }
+  );
 };
