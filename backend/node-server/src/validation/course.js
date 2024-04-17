@@ -6,9 +6,8 @@ const courseCategory = Joi.object({
   courseId: Joi.number().required(),
 });
 
-
 const courseDomain = Joi.object({
-  name: Joi.string().min(10).max(100).required()
+  name: Joi.string().min(10).max(100).required(),
 });
 
 const course = Joi.object({
@@ -22,11 +21,10 @@ const course = Joi.object({
   price: Joi.number().min(0).max(50000).required(),
   discountPercent: Joi.number().min(0).max(100),
   authorId: Joi.number().min(1).required(),
-  thumbnail: Joi.string().uri().required(),
+  thumbnail: Joi.string().required(), //.uri()
   subtitle: Joi.string().required(),
-  titleVideo: Joi.string().uri()
+  titleVideo: Joi.string().uri(),
 });
-
 
 const updateCourse = Joi.object({
   id: Joi.number().required(),
@@ -41,13 +39,17 @@ const updateCourse = Joi.object({
   discountPercent: Joi.number().min(0).max(100),
   thumbnail: Joi.string().uri(),
   subtitle: Joi.string(),
-  titleVideo: Joi.string().uri()
+  titleVideo: Joi.string().uri(),
 }).min(2);
 
-
 const deleteCourse = Joi.object({
-  id: Joi.number().required()
+  id: Joi.number().required(),
 });
 
-
-module.exports = { course, courseCategory, updateCourse, deleteCourse, courseDomain }
+module.exports = {
+  course,
+  courseCategory,
+  updateCourse,
+  deleteCourse,
+  courseDomain,
+};

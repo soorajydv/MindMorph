@@ -6,7 +6,7 @@ const courseSchema = require('../../validation/course');
 const getCourse = async (req, res) => {
   const course = await prisma.course.findFirst({
     where: {
-      id: req.params.id,
+      id: parseInt(req.params.id),
     },
   });
 

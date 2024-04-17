@@ -9,7 +9,7 @@ const {
 const upload = require('../middleware/fileUpload');
 const verifyToken = require('../middleware/verifyToken');
 
-router.post('/:id', getCourse);
+router.get('/:id', getCourse);
 router.post('/', upload('courseThumbnail', 'thumbnail'), createCourse);
 router.patch('/:id', upload('courseThumbnail', 'thumbnail'), updateCourse);
 router.delete('/:id', deleteCourse);
