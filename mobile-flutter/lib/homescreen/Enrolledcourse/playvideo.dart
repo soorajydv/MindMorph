@@ -29,9 +29,9 @@ class _videoplayerState extends State<Playenrollcourse> {
   TextEditingController _descriptionController = TextEditingController();
   List<User> user = [
     User(sectionname: 'Introduction', length: '2:40'),
-    User(sectionname: 'Introduction', length: '2:40'),
-    User(sectionname: 'Introduction', length: '2:40'),
-    User(sectionname: 'Introduction', length: '2:40'),
+    User(sectionname: 'Dart data types ', length: '8:20'),
+    User(sectionname: 'basic widget introduction', length: '10:10'),
+    User(sectionname: 'flutter First course', length: '15:20'),
   ];
   final ExpansionTileController controller = ExpansionTileController();
   late CustomVideoPlayerController _customVideoPlayerController;
@@ -116,17 +116,16 @@ class _videoplayerState extends State<Playenrollcourse> {
                           ),
                         ],
                       ),
-                      50.widthBox,
+                      30.widthBox,
                       Row(
                         children: [
-                          ' Your Progress'
+                          ' Your Progress '
                               .text
                               .size(14)
                               .color(Colors.amber)
                               .make(),
                           Container(
                             height: 80,
-                            width: 100,
                             child: new CircularPercentIndicator(
                               radius: 30.0,
                               lineWidth: 10.0,
@@ -354,7 +353,7 @@ class _videoplayerState extends State<Playenrollcourse> {
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child:
-                                        "i recommend this course to every one who want really learn, i loved it.It describe all basic to pro level. "
+                                        " i loved it.It describe all basic to pro level. "
                                             .text
                                             .color(FeatureColor)
                                             .maxFontSize(20)
@@ -390,7 +389,7 @@ class _videoplayerState extends State<Playenrollcourse> {
                                   Align(
                                     alignment: Alignment.topLeft,
                                     child:
-                                        "i recommend this course to every one who want really learn, i loved it.It describe all basic to pro level. "
+                                        ".It describe all basic to pro level.i liked it "
                                             .text
                                             .color(FeatureColor)
                                             .maxFontSize(20)
