@@ -1,8 +1,24 @@
 const prisma = require('../../../prisma/prisma');
 const courseSchema = require('../../validation/course');
 
-// Get Course by Id
+// Get All Courses
+const getAllCourse = async (req, res) => {
+  const courses = await prisma.course.findMany();
 
+  // const response = courses.map(
+  //   (course) => (course.syllabus = JSON.parse(course.syllabus))
+  // );
+
+  // res.json(response);
+
+  for (let index = 0; index < courses.length; index++) {
+    const course = courses[index];
+    course.syllabus = JSON.parse(course.syllabus);
+  }
+  res.json(courses);
+};
+
+// Get Course by Id
 const getCourse = async (req, res) => {
   const course = await prisma.course.findFirst({
     where: {
@@ -10,7 +26,7 @@ const getCourse = async (req, res) => {
     },
   });
 
-  res.json(course);
+  res.json({ ...course, syllabus: JSON.parse(course.syllabus) });
 };
 
 // Create a new course
@@ -103,6 +119,7 @@ const deleteCourse = async (req, res) => {
 };
 
 module.exports = {
+  getAllCourse,
   getCourse,
   createCourse,
   updateCourse,
