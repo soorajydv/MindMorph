@@ -1,6 +1,5 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:morph/commonwidget/ratingbar.dart';
 import 'package:morph/const/color.dart';
 import 'package:morph/const/fonts.dart';
@@ -167,65 +166,39 @@ class _videoplayerState extends State<videoplayer> {
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontFamily: regular,
-                                      color: FeatureColor),
+                                      color: Colors.amber),
                                 )),
                           ),
-                          10.heightBox,
-                          Expanded(
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 250,
-                                  width: 350,
-                                  child: ExpansionTile(
-                                    controller: controller,
-                                    title: Text(
-                                      'ExpansionTile with explicit controller.',
-                                      style: TextStyle(color: Vx.amber100),
-                                    ),
-                                    children: <Widget>[
-                                      Container(
-                                        height: 130,
-                                        width: 500,
-                                        color: backgrounghilghtcolor,
-                                        child: ListView.builder(
-                                            itemCount: user.length,
-                                            itemBuilder: ((context, index) {
-                                              final users = user[index];
-                                              return Container(
-                                                height: 80,
-                                                color: boxtilecolor,
-                                                child: ListTile(
-                                                  contentPadding:
-                                                      const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 20.0,
-                                                          vertical: 20.0),
-                                                  title: Text(
-                                                    users.sectionname,
-                                                    style: const TextStyle(
-                                                        color: titlecolor),
-                                                  ),
-                                                  subtitle: Text(
-                                                    users.length,
-                                                    style: const TextStyle(
-                                                        color: FeatureColor),
-                                                  ),
-                                                  trailing: const Icon(
-                                                      Icons.arrow_forward_ios),
-                                                  onTap: () {
-                                                    Get.to(() => videoplayer());
-                                                  },
-                                                ),
-                                              );
-                                            })),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
+                          20.heightBox,
+                          "->Introduction"
+                              .text
+                              .size(16)
+                              .color(FeatureColor)
+                              .make(),
+                          5.heightBox,
+                          "->Dart introduction"
+                              .text
+                              .size(16)
+                              .color(FeatureColor)
+                              .make(),
+                          5.heightBox,
+                          "->flutter widgets"
+                              .text
+                              .size(16)
+                              .color(FeatureColor)
+                              .make(),
+                          5.heightBox,
+                          "->flutter first"
+                              .text
+                              .size(16)
+                              .color(FeatureColor)
+                              .make(),
+                          5.heightBox,
+                          "->Statemangemen"
+                              .text
+                              .size(16)
+                              .color(FeatureColor)
+                              .make(),
                         ],
                       ),
                     ),
