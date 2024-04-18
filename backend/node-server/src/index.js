@@ -8,6 +8,8 @@ const courseRouter = require('./router/course/course');
 const socialHandleRouter = require('./router/socialHandle');
 const courseDomainRouter = require('./router/course/courseDomain');
 const courseCategoryRouter = require('./router/course/courseCategory');
+const qnaRouter = require('./router/qna')
+
 // Start Express App
 const bodyParser = require('body-parser');
 const app = express();
@@ -24,6 +26,8 @@ app.use('/course', courseRouter);
 app.use('/socialHandle', socialHandleRouter);
 app.use('/courseDomain', courseDomainRouter)
 app.use('/courseCategory', courseCategoryRouter)
+app.use('/', qnaRouter);
+
 
 // Start Server
 app.listen(process.env.PORT, () => {

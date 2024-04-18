@@ -1,5 +1,5 @@
 const prisma = require("../../../prisma/prisma");
-const { message } = require("../../validation/course/courseCategory");
+
 
 const courseDomainSchema = require("../../validation/course/courseDomain");
 
