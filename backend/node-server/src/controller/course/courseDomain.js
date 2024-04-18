@@ -1,6 +1,4 @@
 const prisma = require("../../../prisma/prisma");
-
-
 const courseDomainSchema = require("../../validation/course/courseDomain");
 
 const getCourseDomain = async (req, res) => {
