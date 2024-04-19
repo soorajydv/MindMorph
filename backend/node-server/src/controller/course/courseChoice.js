@@ -10,6 +10,7 @@ const getLatestCourse = async (req, res) => {
       take: parseInt(qty), // Limit the number of courses
       orderBy: { createdAt: sort === 'latest' ? 'desc' : 'asc' }, // Sort by createdAt field
       select: {
+        id: true,
         title: true,
         thumbnail: true,
         rating: true,
@@ -29,10 +30,11 @@ const getTrendingCourse = async (req, res) => {
     const { qty = 2 } = req.query;
 
     // Fetching top-rated products
-    const topRatedProducts = await prisma.product.findMany({
+    const topRatedProducts = await prisma.course.findMany({
       take: parseInt(qty), // Limit the number of products
       orderBy: { rating: 'desc' }, // Sort by rating in descending order
       select: {
+        id: true,
         title: true,
         thumbnail: true,
         rating: true,
