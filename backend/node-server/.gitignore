@@ -1,6 +1,8 @@
 node_modules/
 secret/
 .env
-media/**/*.jpg
-media/**/*.jpeg
+media/**/*.*
+media/**/
 config/
+ERD.*
+*.json
