@@ -43,10 +43,11 @@ module.exports = async (req, res) => {
         userId: user.id,
         avatar: user.avatar,
         role: user.role,
+token
       };
       return res
         .status(200)
-        .json({ message: 'Login Success', token, userData });
+        .json({ message: 'Login Success', userData });
     }
   );
 };
