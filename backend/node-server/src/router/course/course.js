@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {
+  getAllCourse,
+  getCourse,
   createCourse,
   updateCourse,
   deleteCourse,
@@ -10,7 +12,7 @@ const upload = require('../../middleware/fileUpload');
 const {
   getLatestCourse,
   getTrendingCourse,
-} = require('../controller/course/courseChoice');
+} = require('../../controller/course/courseChoice');
 
 // Course Choice
 router.get('/latest', getLatestCourse);
