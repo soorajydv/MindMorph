@@ -28,7 +28,24 @@ app.use('/courseDomain', courseDomainRouter);
 app.use('/courseCategory', courseCategoryRouter);
 app.use('/', qnaRouter);
 
+
+//The 404 Route 
+app.use('*', function(req, res,next){
+  res.status(404).send({'message':'Requested resource doesn\'t exist'});
+});
+
+
+// Error Handler
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send({'message':'Something went wrong in Server'})
+})
+
+
 // Start Server
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port http://localhost:${process.env.PORT}`);
 });
+
+
+
