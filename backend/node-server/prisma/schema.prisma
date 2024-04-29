@@ -107,7 +107,7 @@ model CourseReview {
   user           User     @relation(fields: [userId], references: [id])
   userId         Int
   description    String   @db.VarChar(500)
-  rating         Float // No rating for reply
+  rating         Float? // No rating for reply
   updatedAt      DateTime @updatedAt
   idCourseReview Int? // If set it is a reply/response
 }
