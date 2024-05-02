@@ -9,10 +9,9 @@ const courseReview = Joi.object({
 
 })
 const courseReviewReply = Joi.object({
-    courseId: Joi.number(),
     userId: Joi.number().required(),
     description: Joi.string(),
-    idCourseReview: Joi.number()
+
 
 })
 

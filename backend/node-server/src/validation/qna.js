@@ -6,7 +6,11 @@ const qna = Joi.object({
     title: Joi.string().required(),
     description: Joi.string().required(),
     responseCount: Joi.number(),
-    idQnA: Joi.number()
-
 })
-module.exports = { qna }
+
+const qnaReply = Joi.object({
+    userId: Joi.number().required(),
+    description: Joi.string().required(),
+    idQnA: Joi.number().required()
+})
+module.exports = { qna, qnaReply }
