@@ -10,6 +10,7 @@ const courseDomainRouter = require('./router/course/courseDomain');
 const courseCategoryRouter = require('./router/course/courseCategory');
 const qnaRouter = require('./router/qna')
 const courseReviewRouter = require('./router/course/courseReview')
+const cartRouter = require('./router/cart')
 
 // Start Express App
 const bodyParser = require('body-parser');
@@ -29,6 +30,7 @@ app.use('/courseDomain', courseDomainRouter)
 app.use('/courseCategory', courseCategoryRouter)
 app.use('/', qnaRouter);
 app.use('/courseReview', courseReviewRouter)
+app.use('/cart',cartRouter)
 
 
 // Start Server

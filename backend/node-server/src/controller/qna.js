@@ -1,4 +1,3 @@
-const { request, response } = require('express');
 const prisma = require('../../prisma/prisma')
 const qnaSchema = require('../validation/qna')
 
@@ -26,7 +25,7 @@ const createQnaReply = async (request, response) => {
         ...request.body
     })
     // If Joi validation fails, send an error response
-    if (error) return res.status(400).json({ message: error.details[0].message });
+    if (error) return response.status(400).json({ message: error.details[0].message });
 
     try {
         const id = parseInt(request.params.id)
@@ -46,7 +45,7 @@ const createQnaReply = async (request, response) => {
         ]);
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+        return response.status(500).json({ message: 'Internal Server Error' });
     }
 }
 
@@ -75,7 +74,6 @@ const deleteQna = async (req, res) => {
         }
         return res.status(200).json({ message: 'QnA entry deleted successfully' });
     } catch (error) {
-        console.error(error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
 };
@@ -86,8 +84,8 @@ const deleteQnaReply = async (request, response) => {
         await prisma.qnAReply.delete({ where: { id } })
         return response.status(200).json({ message: 'QnA Reply deleted successfully' });
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Internal Server Error' });
+        
+        return response.status(500).json({ message: 'Internal Server Error' });
     }
 }
 module.exports = { createQna, createQnaReply, deleteQna, deleteQnaReply }
