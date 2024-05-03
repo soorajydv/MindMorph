@@ -1,5 +1,8 @@
 node_modules/
 secret/
 .env
-media/
+media/**/*.*
+media/**/
 config/
+ERD.*
+package-lock.json

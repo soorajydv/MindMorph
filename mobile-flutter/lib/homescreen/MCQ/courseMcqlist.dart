@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/homescreen/assingmnet/assignment.dart';
-import 'package:morph/homescreen/assingmnet/completedasiignment.dart';
+import 'package:morph/homescreen/MCQ/mcqpage.dart';
 
 class User {
   final String coursename;
@@ -14,38 +13,38 @@ class User {
       required this.coursename});
 }
 
-class assignmentlist extends StatelessWidget {
-  assignmentlist({super.key});
+class Coursesmcqlist extends StatelessWidget {
+  Coursesmcqlist({super.key});
   List<User> user = [
     User(
         UrlAvatar:
             'https://i.pinimg.com/736x/cf/0b/74/cf0b7475f26c043b55fe50cfb98c15d5.jpg',
-        assignment: 'Assignment 1',
+        assignment: 'MCQ',
         coursename: 'fllutter basic'),
     User(
         UrlAvatar:
             'shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQgWejE2_K0DKRYUP09A1nuMu6CuIs3oULFak4QA4YLA&',
-        assignment: 'Assignment 2',
+        assignment: 'MCQ',
         coursename: 'java full course'),
     User(
         UrlAvatar:
             'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg/1200px-Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg',
-        assignment: 'Assignment 3',
+        assignment: 'MCQ',
         coursename: 'Devops'),
     User(
         UrlAvatar:
             'https://i.pinimg.com/736x/cf/0b/74/cf0b7475f26c043b55fe50cfb98c15d5.jpg',
-        assignment: 'Assignment 1',
+        assignment: 'MCQ',
         coursename: 'fllutter basic'),
     User(
         UrlAvatar:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQgWejE2_K0DKRYUP09A1nuMu6CuIs3oULFak4QA4YLA&s',
-        assignment: 'Assignment 2',
+        assignment: 'MCQ',
         coursename: 'java full course'),
     User(
         UrlAvatar:
             'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg/1200px-Neil_deGrasse_Tyson_in_June_2017_%28cropped%29.jpg',
-        assignment: 'Assignment 3',
+        assignment: 'MCQ',
         coursename: 'Devops'),
   ];
   @override
@@ -56,27 +55,27 @@ class assignmentlist extends StatelessWidget {
         shadowColor: Colors.white,
         foregroundColor: Colors.red,
         backgroundColor: themecolor,
-        actions: [
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: boxtilecolor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                    side: BorderSide(color: titlecolor))),
-            onPressed: () {
-              Get.to(() => Completedassignmentlist());
-            },
-            child: Text(
-              'Done',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
+        // actions: [
+        //   TextButton(
+        //     style: TextButton.styleFrom(
+        //         backgroundColor: boxtilecolor,
+        //         shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(8),
+        //             side: BorderSide(color: titlecolor))),
+        //     onPressed: () {
+        //       Get.to(() => Completedassignmentlist());
+        //     },
+        //     child: Text(
+        //       'Done',
+        //       style: TextStyle(
+        //         color: Colors.white,
+        //       ),
+        //     ),
+        //   ),
+        // ],
         title: const Text(
-          'Assignments',
-          style: TextStyle(color: titlecolor),
+          'Multiple choice Question',
+          style: TextStyle(color: Colors.amber, fontSize: 18),
         ),
       ),
       body: Container(
@@ -89,8 +88,8 @@ class assignmentlist extends StatelessWidget {
                 color: boxtilecolor,
                 semanticContainer: true,
                 child: ListTile(
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20.0, vertical: 20.0),
                   leading: CircleAvatar(
                     radius: 28,
                     backgroundImage: NetworkImage(users.UrlAvatar),
@@ -105,7 +104,7 @@ class assignmentlist extends StatelessWidget {
                   ),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () {
-                    Get.to(() => Asignmentpage());
+                    Get.to(() => MCQcollection());
                   },
                 ),
               );

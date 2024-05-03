@@ -13,9 +13,8 @@ const course = Joi.object({
   authorId: Joi.number().min(1).required(),
   thumbnail: Joi.string().uri().required(),
   subtitle: Joi.string().required(),
-  titleVideo: Joi.string().uri()
+  titleVideo: Joi.string().uri(),
 });
-
 
 const updateCourse = Joi.object({
   id: Joi.number().required(),
@@ -30,13 +29,11 @@ const updateCourse = Joi.object({
   discountPercent: Joi.number().min(0).max(100),
   thumbnail: Joi.string().uri(),
   subtitle: Joi.string(),
-  titleVideo: Joi.string().uri()
+  titleVideo: Joi.string().uri(),
 }).min(2);
 
-
 const deleteCourse = Joi.object({
-  id: Joi.number().required()
+  id: Joi.number().required(),
 });
 
-
-module.exports = { course, updateCourse, deleteCourse }
+module.exports = { course, updateCourse, deleteCourse };

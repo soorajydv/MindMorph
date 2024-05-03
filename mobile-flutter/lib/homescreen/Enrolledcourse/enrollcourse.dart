@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:morph/const/color.dart';
-import 'package:morph/cousredetail/videoplayer.dart';
+import 'package:morph/homescreen/Enrolledcourse/playvideo.dart';
 
 class User {
   final String coursename;
@@ -16,8 +16,8 @@ class User {
       required this.instructer});
 }
 
-class Cartpage extends StatelessWidget {
-  Cartpage({super.key});
+class Enrolledcourse extends StatelessWidget {
+  Enrolledcourse({super.key});
   List<User> user = [
     User(
       thumbnail:
@@ -55,10 +55,9 @@ class Cartpage extends StatelessWidget {
         iconTheme: const IconThemeData(color: FeatureColor),
         toolbarHeight: 80,
         shadowColor: Colors.white,
-        foregroundColor: Colors.red,
         backgroundColor: themecolor,
         title: const Text(
-          'My Cart List',
+          'My Courses',
           style: TextStyle(color: titlecolor),
         ),
       ),
@@ -106,7 +105,7 @@ class Cartpage extends StatelessWidget {
                   ),
                   trailing: Icon(Icons.arrow_forward_ios),
                   onTap: () {
-                    Get.to(() => videoplayer());
+                    Get.to(() => Playenrollcourse());
                   },
                 ),
               );
