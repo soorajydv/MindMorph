@@ -57,15 +57,28 @@ model User {
   EnrolledCourse    EnrolledCourse[]
 }
 
+model OAuthUser {
+  id            Int            @id @default(autoincrement())
+  fullName      String
+  email         String
+  avatarUrl     String?
+  oauthId       String
+  oauthProvider OAuthProvider?
+  socialHandle  SocialHandle[]
+}
+
 model SocialHandle {
-  id       Int     @id @default(autoincrement())
-  website  String? @unique
-  twitter  String? @unique
-  youtube  String? @unique
-  linkdin  String? @unique
-  facebook String? @unique
-  user     User    @relation(fields: [userId], references: [id])
-  userId   Int     @unique
+  id          Int       @id @default(autoincrement())
+  website     String?   @unique
+  twitter     String?   @unique
+  youtube     String?   @unique
+  linkdin     String?   @unique
+  facebook    String?   @unique
+  google      String?   @unique
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      Int?      @unique
+  OAuthUser   OAuthUser @relation(fields: [oAuthUserId], references: [id])
+  oAuthUserId Int
 }
 
 model CourseDomain {
