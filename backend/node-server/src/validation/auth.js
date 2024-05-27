@@ -1,3 +1,4 @@
+const { OAuthProvider } = require('@prisma/client');
 const Joi = require('joi');
 
 const user = Joi.object({
@@ -7,6 +8,8 @@ const user = Joi.object({
   role: Joi.string().valid('STUDENT', 'INSTRUCTOR', 'ADMIN').required(),
   avatar: Joi.string().uri(),
   birthdate: Joi.date().iso(),
+  oauthId: Joi.string(),
+  OAuthProvider: Joi.string()
 });
 
 const loginCredential = Joi.object({

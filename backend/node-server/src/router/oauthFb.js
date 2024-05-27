@@ -2,7 +2,7 @@ const passport = require('passport');
 const express = require('express');
 require('passport-facebook')
 
-var router = express.Router();
+const router = express.Router();
 
 router.get('/oauthFb', function (req, res) {
     res.render('login.ejs'); // load the index.ejs file

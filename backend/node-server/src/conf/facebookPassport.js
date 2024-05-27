@@ -50,10 +50,10 @@ module.exports = function (passport) {
                 //             const socialHandle = await prisma.socialHandle.upsert({
                 //                 where: { userId: createdUser.id },
                 //                 create: {
-                //                     google: profile.id,
+                //                     facebook: profile.id,
                 //                     OAuthUser: { connect: { id: createdUser.id } }
                 //                 },
-                //                 update: { google: profile.id } // If social handle already exists, update googleId
+                //                 update: { facebook: profile.id } // If social handle already exists, update googleId
                 //             });
 
                 //             done(null, createdUser);
