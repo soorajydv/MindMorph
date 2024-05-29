@@ -8,6 +8,8 @@ const { Pool } = require('pg');
 require('ejs');
 require('./conf/facebookPassport')(passport);
 const http = require('http');
+const cors = require('cors')
+const { Server } = require("socket.io");
 
 // Import API Routers
 const authRouter = require('./router/auth');
@@ -27,30 +29,17 @@ const chat = require('./router/chat');
 const bodyParser = require('body-parser');
 const app = express();
 const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
 const initializeSocket = require('./socket/socket');
 initializeSocket(server); // Pass the server instance here
 
-// Route for sending messages
-app.post('/send-message', (req, res) => {
-  const { senderId, receiverId, message } = req.body;
-
-  // Your logic to save the message to the database goes here
-
-  // Emit the message to the receiver's socket
-  io.to(receiverId).emit('chat-message', { senderId, message });
-
-  res.json({ success: true });
-});
-
-// Route for receiving messages
-app.get('/receive-message/:userId', (req, res) => {
-  const userId = req.params.userId;
-
-  // Your logic to retrieve messages for the user from the database goes here
-
-  res.json({ messages: " Retrieved messages" });
-});
 
 
 app.use(bodyParser.json());

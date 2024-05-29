@@ -2,8 +2,6 @@ const express = require('express');
 const { Server } = require("socket.io");
 const prisma = require('../../prisma/prisma');
 
-const socketsConnected = new Set();
-
 function initializeSocket(server) {
     const io = new Server(server);
 
@@ -12,11 +10,12 @@ function initializeSocket(server) {
     io.on('connection', (socket) => {
         console.log('Socket connected', socket.id);
 
-        socket.on('join-room', (userId) => {
-            socket.join(userId);
+        socket.on('join-room', (roomId) => {
+            socket.join(roomId);
+            console.log(`User joined room: ${roomId}`);
         });
 
-        socket.on('send-message', async ({ senderId, receiverId, message }) => {
+        socket.on('send-message', async ({ senderId, receiverId, message, roomId }) => {
             try {
                 // Find or create a conversation between the two users
                 let conversation = await prisma.conversation.findFirst({
@@ -52,8 +51,8 @@ function initializeSocket(server) {
                 });
 
                 // Emit the message to the receiver's room
-                io.to(receiverId.toString()).emit('receive-message', newMessage);
-                io.to(senderId.toString()).emit('receive-message', newMessage);
+                io.to(roomId).emit('receive-message', newMessage);
+
             } catch (error) {
                 console.error('Error sending message:', error);
             }

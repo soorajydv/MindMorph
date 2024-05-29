@@ -8,12 +8,23 @@ const nameInput = document.getElementById('name-input')
 const messageForm = document.getElementById('message-form')
 const messageInput = document.getElementById('message-input')
 
-const messageTone = new Audio('../../media/audio/message-tone.mp3')
+const messageTone = new Audio('/message-tone.mp3')
 
 messageForm.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessage()
 })
+
+const senderId = 1; // Replace with dynamic value as needed
+const receiverId = 2; // Replace with dynamic value as needed
+const roomId = [senderId, receiverId].sort().join();
+
+socket.on("connect", () => {
+    console.log("Connected to socket server");
+
+    // Join the user room
+    socket.emit("join-room", roomId);
+});
 
 socket.on('clients-total', (data) => {
     clientsTotal.innerText = `Total Clients: ${data}`
@@ -21,10 +32,12 @@ socket.on('clients-total', (data) => {
 
 function sendMessage() {
     if (messageInput.value === '') return
-    console.log(messageInput.value)
+    // console.log(messageInput.value)
     const data = {
-        name: nameInput.value,
-        message: messageInput.value,
+        senderId,
+        receiverId,
+        message,
+        roomId,
         dateTime: new Date(),
     }
     socket.emit('message', data)
@@ -89,5 +102,3 @@ function clearFeedback() {
         element.parentNode.removeChild(element)
     })
 }
-
-user = { user1: 'sooraj', user2: 'rahul' }

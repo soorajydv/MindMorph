@@ -36,43 +36,48 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
+    <script src="../src/socket/socket.js"></script>
+
     <script>
       const socket = io();
+      const senderId = 1; // Replace with dynamic value as needed
+      const receiverId = 2; // Replace with dynamic value as needed
+      const roomId = [senderId, receiverId].sort().join();
+
       socket.on("connect", () => {
         console.log("Connected to socket server");
 
         // Join the user room
-        socket.emit("join-room", 1);
-
-        // Fetch existing conversation
-        fetch(`/chat/conversation/${1}/${2}`)
-          .then((response) => response.json())
-          .then((conversation) => {
-            // Display the conversation
-            console.log("Conversation:", conversation);
-          });
+        socket.emit("join-room", roomId);
       });
 
       // Send a message
       function sendMessage(message) {
         const messageData = {
-          senderId: 1,
-          receiverId: 2,
-          message: message,
+          senderId,
+          receiverId,
+          message,
+          roomId
         };
         socket.emit("send-message", messageData);
       }
+
+      // Handle form submission
+      document.getElementById("message-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const message = document.getElementById("message-input").value;
+        sendMessage(message);
+        document.getElementById("message-input").value = ''; // Clear the input field
+      });
 
       // Receive a message
       socket.on("receive-message", (message) => {
         console.log("New message:", message);
         // Display the message
-      });
-
-      // Example of sending a message
-      document.getElementById("sendButton").addEventListener("click", () => {
-        const message = document.getElementById("messageInput").value;
-        sendMessage(message);
+        const messageContainer = document.getElementById("message-container");
+        const messageElement = document.createElement("li");
+        messageElement.textContent = message.message;
+        messageContainer.appendChild(messageElement);
       });
     </script>
 
