@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.12.1",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
@@ -31,11 +30,18 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
+<<<<<<< Updated upstream
     "@mermaid-js/mermaid-cli": "^10.8.0",
     "ejs": "^3.1.9",
+=======
+    "@mermaid-js/mermaid-cli": "^9.1.7",
+    "@prisma/client": "^5.15.0",
+    "@types/body-parser": "^1.19.5",
+    "ejs": "^3.1.10",
+>>>>>>> Stashed changes
     "nodemon": "^3.0.3",
-    "prisma": "^5.12.1",
-    "prisma-erd-generator": "^1.11.2",
+    "prisma": "^5.15.0",
+    "prisma-erd-generator": "^1.2.5",
     "sequelize-cli": "^6.6.2"
   }
 }
