@@ -37,7 +37,7 @@ function uploadFile(path, nameAttribute) {
   const storage = saveTo(path);
   return multer({
     storage: storage,
-    limits: { fileSize: 1024 * 1024 * 0.5 }, // Limit file size to 0.5MB (optional)
+    limits: { fileSize: 1024 * 1024 * 5 }, // Limit file size to 0.5MB (optional)
     fileFilter: (req, file, cb) => {
       const allowedTypes = [
         'image/jpeg',
