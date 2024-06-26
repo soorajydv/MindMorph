@@ -12,7 +12,8 @@ const mcqValidationSchema = Joi.object({
 });
 
 const mcqUpdateValidationSchema = Joi.object({
-  lectureId: Joi.string().required(),
+  mcqId:Joi.string().required(),
+  lectureId: Joi.string(),
   time: Joi.string().length(8), // Ensuring time is a string with a length of 8
   question: Joi.string(),
   option1: Joi.string(),

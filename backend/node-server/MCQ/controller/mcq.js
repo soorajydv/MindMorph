@@ -39,15 +39,14 @@ const getMcqByLectureId = async(req,res)=>{
 }
 
 const updateMcq = async(req,res)=>{
-  const mcqId = req.params.id
-
+  
   // Validate the request body
   const { error,value } = mcqUpdateValidationSchema.validate(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
 
   try {
     const updatedMCQ = await MCQ.findByIdAndUpdate(
-      mcqId,
+      value.mcqId,
       {
         lectureId: value.lectureId,
         time: value.time,
