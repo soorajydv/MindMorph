@@ -25,6 +25,7 @@ const cartRouter = require('./router/cart');
 const enrollCourseRouter = require('./router/enrolledCourse');
 const oauthRouter = require('./router/oauth');
 const oauthFbRouter = require('./router/oauthFb');
+const gameRouter = require('./router/game')
 
 // Import Controllers
 const initializeSocket = require('./socket/chat/socket');
@@ -80,7 +81,7 @@ app.use('/cart', cartRouter);
 app.use('/enroll', enrollCourseRouter);
 app.use('/', oauthRouter);
 app.use('/', oauthFbRouter);
-
+app.use('/', gameRouter);
 
 // The 404 Route
 app.use('*', function (req, res, next) {
