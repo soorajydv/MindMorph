@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -69,7 +71,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   late IO.Socket socket;
   final TextEditingController _controller = TextEditingController();
-  final List<String> _messages = [];
+  final List<Row> _messages = [];
 
   @override
   void initState() {
@@ -80,21 +82,39 @@ class _ChatScreenState extends State<ChatScreen> {
       'autoConnect': false,
     });
 
-    socket.connect();
+    try {
+      socket.connect();
 
-    socket.on('connect', (_) {
-      print('connected: ${socket.id}');
-    });
-
-    socket.on('receive-message', (msg) {
-      setState(() {
-        _messages.add(msg);
+      socket.on('connect', (_) {
+        print('connected: ${socket.id}');
       });
-    });
+//msg
+      socket.on('receive-message', (msg) {
+        final messageReceived = msg["message"];
+        final messageBox =
+            Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            decoration: const BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.all(Radius.circular(7))),
+            child: Text(
+              messageReceived,
+              style: const TextStyle(color: Colors.white),
+            ),
+          )
+        ]);
+        setState(() {
+          _messages.add(messageBox);
+        });
+      });
 
-    socket.on('disconnect', (_) {
-      print('disconnected');
-    });
+      socket.on('disconnect', (_) {
+        print('disconnected');
+      });
+    } catch (e) {
+      print('Error Due to : $e');
+    }
   }
 
   @override
@@ -106,11 +126,27 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
-      String message = _controller.text;
+      final sendData = _controller.text;
+      final jsonData = jsonDecode(sendData);
+      String message = jsonData["message"];
       setState(() {
-        _messages.add(message); // Add the message to the list before sending
+        final messageBox =
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            decoration: const BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.all(Radius.circular(7))),
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
+          )
+        ]);
+        _messages.add(messageBox); // Add the message to the list before sending
       });
-      socket.emit('send-message', message);
+      print('Message Sent: $message');
+      socket.emit('send-message', sendData);
       _controller.clear();
     }
   }
@@ -128,7 +164,7 @@ class _ChatScreenState extends State<ChatScreen> {
               itemCount: _messages.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(_messages[index]),
+                  title: _messages[index],
                 );
               },
             ),
