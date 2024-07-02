@@ -1,2 +1,16 @@
-## MindMorph - A MOOC Platform
-This is our Final Year Project of Pokhara University Eigth Semester.In MindMorph there are 2 types of users Student and Teachers. Students can enroll course and learn from prerecorded videos. Teachers can upload a new coursem update course materials and so on
+# chat2
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
