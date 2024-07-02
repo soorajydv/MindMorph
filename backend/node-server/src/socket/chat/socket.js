@@ -51,7 +51,8 @@ function initializeSocket(io) {
             const { error, value } = conversationSchema.validate(JSON.parse(data));
 
             // If Joi validation fails, send an error response
-            if (error) return res.status(400).json({ message: error.details[0].message });
+            if (error) 
+            return io.emit("error-on-send-message", error.details[0].message); 
             const senderId = socket.userId;
 
 
