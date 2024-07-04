@@ -87,6 +87,7 @@ app.use('/', oauthRouter);
 app.use('/', oauthFbRouter);
 app.use('/', gameRouter);
 app.use('/',esewaRouter)
+
 // The 404 Route
 app.use('*', function (req, res, next) {
   res.status(404).send({ 'message': 'Requested resource doesn\'t exist' });
@@ -100,6 +101,9 @@ app.use((err, req, res, next) => {
 
 // Start Server
 const port = process.env.PORT || 3000; // Use a default port if not specified
-server.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`);
+const serverIpAddress = '192.168.1.89'; // Replace with your server's IP address
+
+server.listen(port, serverIpAddress, () => {
+  console.log(`Server is running on http://${serverIpAddress}:${port}`);
 });
+

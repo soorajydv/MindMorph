@@ -22,10 +22,10 @@ const prisma = require('../../prisma/prisma')
 //     return req.userId
 //   }
 // }
-
 const esewarequest = async(req,res)=>{
     res.render('esewarequest',{"uid":uid})
 }
+
 
 const esewaResponse = async (req, res) => {
     // verifyToken(req);
@@ -66,7 +66,6 @@ const esewaResponse = async (req, res) => {
     }
 };
 
-module.exports = esewaResponse;
-
 
 module.exports={esewarequest,esewaResponse}
+
