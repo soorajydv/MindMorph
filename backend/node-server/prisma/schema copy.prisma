@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["referentialActions"]
 }
 
 generator erd {
@@ -72,7 +71,6 @@ model CourseCategory {
 
   // Foreign Keys
   courseId Course[]
-  Game     Game[]
 }
 
 model Course {
@@ -191,7 +189,6 @@ model User {
   sentMessages      Message[]           @relation("sentMessages")
   receivedMessages  Message[]           @relation("receivedMessages")
   conversation      Conversation[]
-  GameView          GameView[]
 }
 
 model Message {
@@ -215,47 +212,18 @@ model Conversation {
 
 // Define the Game model
 model Game {
-  id               Int                @id @default(autoincrement())
-  viewsCount       Int                @default(0)
-  courseCategory   CourseCategory     @relation(fields: [courseCategoryId], references: [id])
-  courseCategoryId Int
-  GameView         GameView[]
+  id              Int               @id @default(autoincrement())
+  courseCategory  Int
+  viewsCount      Int
   gamificationData GamificationData[]
 }
 
+// Define the GamificationData model
 model GamificationData {
-  id       Int     @id @default(autoincrement())
-  text     String
-  imageUrl String?
-  gameId   Int
-  game     Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
-}
-
-model GameView {
-  id       Int    @id @default(autoincrement())
-  userId   Int
-  gameId   Int
-  viewTime String
-  game     Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model Payment {
-  id            Int         @id @default(autoincrement())
-  userId        Int
-  courseId      Int
-  paymentMethod String
-  amount        Float
-  txnId         Int      @unique
-  transaction   Transaction @relation(fields: [txnId], references: [id])
-  createdAt    DateTime  @default(now())
-}
-
-model Transaction {
-  id      Int      @id @default(autoincrement())
-  oid     String   @unique
-  refid   String
-  amt     Float
-  payment Payment?
+  id              Int      @id @default(autoincrement())
+  text            String
+  imageUrl        String?
+  gamificationId  Int
+  game            Game     @relation(fields: [gamificationId], references: [id])
   createdAt    DateTime  @default(now())
 }

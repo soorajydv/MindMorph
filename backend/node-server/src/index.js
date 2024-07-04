@@ -25,6 +25,8 @@ const cartRouter = require('./router/cart');
 const enrollCourseRouter = require('./router/enrolledCourse');
 const oauthRouter = require('./router/oauth');
 const oauthFbRouter = require('./router/oauthFb');
+const gameRouter = require('./router/game')
+const esewaRouter = require('./router/esewa')
 
 // Import Controllers
 const initializeSocket = require('./socket/chat/socket');
@@ -37,6 +39,9 @@ app.use(cors());
 const server = http.createServer(app);
 const io = new Server(server);
 initializeSocket(io);
+
+app.set( 'view engine' , 'ejs' ); 
+
 
 //implement bodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -80,8 +85,8 @@ app.use('/cart', cartRouter);
 app.use('/enroll', enrollCourseRouter);
 app.use('/', oauthRouter);
 app.use('/', oauthFbRouter);
-
-
+app.use('/', gameRouter);
+app.use('/',esewaRouter)
 // The 404 Route
 app.use('*', function (req, res, next) {
   res.status(404).send({ 'message': 'Requested resource doesn\'t exist' });
