@@ -32,40 +32,28 @@ enum Language {
   Hindi
 }
 
-model User {
-  id        Int       @id @default(autoincrement())
-  fullName  String
-  email     String    @unique
-  password  String
-  role      Role      @default(STUDENT)
-  avatar    String?
-  birthdate DateTime?
-  createdAt DateTime  @default(now())
-
-  // if authenticates using oauth 
-  oauthId       String?
+model OAuthUser {
+  id            Int            @id @default(autoincrement())
+  fullName      String
+  email         String
+  avatarUrl     String?
+  oauthId       String
   oauthProvider OAuthProvider?
-
-  // Foreign Keys
-  socialHandle      SocialHandle?
-  course            Course[]
-  courseReview      CourseReview[]
-  qna               QnA[]
-  courseReviewReply CourseReviewReply[]
-  cart              Cart[]
-  QnAReply          QnAReply[]
-  EnrolledCourse    EnrolledCourse[]
+  socialHandle  SocialHandle[]
 }
 
 model SocialHandle {
-  id       Int     @id @default(autoincrement())
-  website  String? @unique
-  twitter  String? @unique
-  youtube  String? @unique
-  linkdin  String? @unique
-  facebook String? @unique
-  user     User    @relation(fields: [userId], references: [id])
-  userId   Int     @unique
+  id          Int       @id @default(autoincrement())
+  website     String?   @unique
+  twitter     String?   @unique
+  youtube     String?   @unique
+  linkdin     String?   @unique
+  facebook    String?   @unique
+  google      String?   @unique
+  user        User?     @relation(fields: [userId], references: [id])
+  userId      Int?      @unique
+  OAuthUser   OAuthUser @relation(fields: [oAuthUserId], references: [id])
+  oAuthUserId Int
 }
 
 model CourseDomain {
@@ -173,4 +161,51 @@ model EnrolledCourse {
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
   enrolledAt DateTime @default(now())
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  fullName  String
+  email     String    @unique
+  password  String
+  role      Role      @default(STUDENT)
+  avatar    String?
+  birthdate DateTime?
+  createdAt DateTime  @default(now())
+
+  // if authenticates using oauth 
+  oauthId       String?
+  oauthProvider OAuthProvider?
+
+  // Foreign Keys
+  socialHandle      SocialHandle?
+  course            Course[]
+  courseReview      CourseReview[]
+  qna               QnA[]
+  courseReviewReply CourseReviewReply[]
+  cart              Cart[]
+  QnAReply          QnAReply[]
+  EnrolledCourse    EnrolledCourse[]
+  sentMessages      Message[]           @relation("sentMessages")
+  receivedMessages  Message[]           @relation("receivedMessages")
+  conversation      Conversation[]
+}
+
+model Message {
+  id             Int           @id @default(autoincrement())
+  message        String
+  sender         User          @relation(name: "sentMessages", fields: [senderId], references: [id])
+  receiver       User          @relation(name: "receivedMessages", fields: [receiverId], references: [id])
+  senderId       Int
+  receiverId     Int
+  Conversation   Conversation? @relation(fields: [conversationId], references: [id])
+  conversationId Int?
+  createdAt      DateTime      @default(now())
+}
+
+model Conversation {
+  id           Int       @id @default(autoincrement())
+  participants User[]
+  messages     Message[]
+  createdAt    DateTime  @default(now())
 }

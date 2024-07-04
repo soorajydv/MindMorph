@@ -5,7 +5,7 @@ const prisma = require('../../../prisma/prisma');
 const deleteFile = require('../../middleware/deleteFile');
 
 // Express route for signup
-module.exports = async (req, res) => {
+const signup = async (req, res) => {
   const { error, value } = authSchema.user.validate(req.body);
 
   // If Joi validation fails, send an error response
@@ -41,4 +41,4 @@ module.exports = async (req, res) => {
     return res.status(status).json({ message: message });
   }
 };
-// );
+module.exports = signup

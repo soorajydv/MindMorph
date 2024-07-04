@@ -1,53 +1,55 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { loginCredential } = require('../../validation/auth');
+const authSchema = require('../../validation/auth');
 const prisma = require('../../../prisma/prisma');
+require('dotenv').config();
 
-module.exports = async (req, res) => {
-  const { error, value } = loginCredential.validate(req.body);
+const login = async(req,res) => {
+  const { error, value } = authSchema.loginCredential.validate(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
 
-  // Check if a user with the  email exists
-  const user = await prisma.user.findFirst({
-    where: {
-      email: value.email,
-    },
-  });
+  try {
+    // Check if a user with the email exists
+    const user = await prisma.user.findFirst({
+      where: {
+        email: value.email,
+      },
+    });
 
-  if (!user) return res.status(400).json({ message: "Email doesn't exists" });
+    if (!user) return res.status(400).json({ message: "Email doesn't exist" });
 
-  // Now user with email exist so matching password
-  const passwordMatch = await bcrypt.compare(value.password, user.password);
-  if (!passwordMatch)
-    return res.status(400).json({ message: 'Wrong Password' });
+    // Now user with email exists, so match password
+    const passwordMatch = await bcrypt.compare(value.password, user.password);
+    if (!passwordMatch) return res.status(400).json({ message: 'Wrong Password' });
 
-  // Both email & password are correct, now login user and send token as response
-  // const token = jwt.sign({ userId: user._id }, 'your-secret-key', {
-  //   expiresIn: '1h',
-  //   });
-  // console.log('Value: ', value);
-  jwt.sign(
-    user,
-    process.env.JWT_SECRET_KEY,
-    { expiresIn: process.env.JWT_EXPIRES_IN },
-    function (err, token) {
-      if (err) {
-        console.log('Error: ', err);
-        return res
-          .status(400)
-          .json({ message: 'failed to Generate token', error: err });
+    // Generate JWT token
+    jwt.sign(
+      { userId: user.id },
+      process.env.JWT_SECRET_KEY,
+      { expiresIn: process.env.JWT_EXPIRES_IN },
+      (err, token) => {
+        if (err) {
+          console.error('Error generating token:', err);
+          return res.status(500).json({ message: 'Failed to generate token' });
+        }
+
+        const userData = {
+          fullName: user.fullName,
+          email: user.email,
+          userId: user.id,
+          avatar: user.avatar,
+          role: user.role,
+        };
+
+        console.log("Token: ",token);
+        res.status(200).json({message:"Login Success"})
+        return res.render('index',{userinfo:userData.fullName})
+        // return res.send("logged in")
       }
-      const userData = {
-        fullName: user.fullName,
-        email: user.email,
-        userId: user.id,
-        avatar: user.avatar,
-        role: user.role,
-token
-      };
-      return res
-        .status(200)
-        .json({ message: 'Login Success', userData });
-    }
-  );
+    );
+  } catch (error) {
+    console.error('Login error:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 };
+module.exports = login
