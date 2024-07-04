@@ -220,15 +220,15 @@ model Game {
   courseCategory   CourseCategory     @relation(fields: [courseCategoryId], references: [id])
   courseCategoryId Int
   GameView         GameView[]
-  gamificationData GamificationData[] 
+  gamificationData GamificationData[]
 }
 
 model GamificationData {
-  id             Int     @id @default(autoincrement())
-  text           String
-  imageUrl       String?
-  gameId Int
-  game           Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  id       Int     @id @default(autoincrement())
+  text     String
+  imageUrl String?
+  gameId   Int
+  game     Game    @relation(fields: [gameId], references: [id], onDelete: Cascade)
 }
 
 model GameView {
@@ -237,5 +237,25 @@ model GameView {
   gameId   Int
   viewTime String
   game     Game   @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  user     User   @relation(fields: [userId], references: [id],onDelete: Cascade)
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  courseId      Int
+  paymentMethod String
+  amount        Float
+  txnId         Int      @unique
+  transaction   Transaction @relation(fields: [txnId], references: [id])
+  createdAt    DateTime  @default(now())
+}
+
+model Transaction {
+  id      Int      @id @default(autoincrement())
+  oid     String   @unique
+  refid   String
+  amt     Float
+  payment Payment?
+  createdAt    DateTime  @default(now())
 }
