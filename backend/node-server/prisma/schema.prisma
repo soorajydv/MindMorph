@@ -259,3 +259,9 @@ model Transaction {
   payment Payment?
   createdAt    DateTime  @default(now())
 }
+
+model Swiper{
+  id      Int      @id @default(autoincrement())
+  swiperPath String
+  isVisible Boolean @default(true)
+}
