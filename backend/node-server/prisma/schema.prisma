@@ -157,7 +157,7 @@ model User {
   QnAReply             QnAReply[]
   SearchHistory        SearchHistory[]
   socialHandle         SocialHandle?
-  conversation         Conversation[]         @relation("ConversationToUser")
+  conversation         Conversation[]   
 }
 
 model Message {
@@ -165,7 +165,7 @@ model Message {
   message        String
   senderId       Int
   receiverId     Int
-  conversationId Int?
+  conversationId Int
   createdAt      DateTime      @default(now())
   Conversation   Conversation? @relation(fields: [conversationId], references: [id])
   receiver       User          @relation("receivedMessages", fields: [receiverId], references: [id])
@@ -176,7 +176,7 @@ model Conversation {
   id           Int       @id @default(autoincrement())
   createdAt    DateTime  @default(now())
   messages     Message[]
-  participants User[]    @relation("ConversationToUser")
+  participants User[]    
 }
 
 model Game {
