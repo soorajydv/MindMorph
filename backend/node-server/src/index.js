@@ -27,6 +27,11 @@ const oauthRouter = require('./router/oauth');
 const oauthFbRouter = require('./router/oauthFb');
 const gameRouter = require('./router/game')
 const esewaRouter = require('./router/esewa')
+const swiper = require('./router/swiper')
+const assignmentRouterInst = require('./router/assignment/instructor')
+const assignmentRouterStd = require('./router/assignment/student')
+const assignmentRouter = require('./router/assignment/assignment')
+const verifyCourseRouter = require('./router/verifyCourse')
 
 // Import Controllers
 const initializeSocket = require('./socket/chat/socket');
@@ -86,7 +91,12 @@ app.use('/enroll', enrollCourseRouter);
 app.use('/', oauthRouter);
 app.use('/', oauthFbRouter);
 app.use('/', gameRouter);
-app.use('/',esewaRouter)
+app.use('/',esewaRouter);
+app.use('/swiper',swiper);
+app.use('/assignment',assignmentRouter)
+app.use('/assignment/instructor',assignmentRouterInst)
+app.use('/assignment/student',assignmentRouterStd)
+app.use('/course',verifyCourseRouter)
 
 // The 404 Route
 app.use('*', function (req, res, next) {
@@ -101,7 +111,7 @@ app.use((err, req, res, next) => {
 
 // Start Server
 const port = process.env.PORT || 3000; // Use a default port if not specified
-const serverIpAddress = '192.168.1.89'; // Replace with your server's IP address
+const serverIpAddress = 'localhost' || '192.168.1.89'; // Replace with your server's IP address
 
 server.listen(port, serverIpAddress, () => {
   console.log(`Server is running on http://${serverIpAddress}:${port}`);

@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["referentialActions"]
 }
 
 generator erd {
@@ -11,26 +10,6 @@ generator erd {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-}
-
-enum Role {
-  STUDENT
-  INSTRUCTOR
-  ADMIN
-}
-
-enum OAuthProvider {
-  GOOGLE
-  FACEBOOK
-  MICROSOFT
-  GITHUB
-  TWITTER
-}
-
-enum Language {
-  English
-  Nepali
-  Hindi
 }
 
 model OAuthUser {
@@ -50,175 +29,162 @@ model SocialHandle {
   youtube     String?   @unique
   linkdin     String?   @unique
   facebook    String?   @unique
-  google      String?   @unique
-  user        User?     @relation(fields: [userId], references: [id])
   userId      Int?      @unique
-  OAuthUser   OAuthUser @relation(fields: [oAuthUserId], references: [id])
+  google      String?   @unique
   oAuthUserId Int
+  OAuthUser   OAuthUser @relation(fields: [oAuthUserId], references: [id])
+  user        User?     @relation(fields: [userId], references: [id])
 }
 
 model CourseDomain {
   id               Int              @id @default(autoincrement())
   name             String
-  // Foreign Keys
   courseCategories CourseCategory[]
 }
 
 model CourseCategory {
   id             Int          @id @default(autoincrement())
   name           String
-  coursedomain   CourseDomain @relation(fields: [courseDomainId], references: [id])
   courseDomainId Int
-
-  // Foreign Keys
-  courseId Course[]
-  Game     Game[]
+  courseId       Course[]
+  coursedomain   CourseDomain @relation(fields: [courseDomainId], references: [id])
+  Game           Game[]
 }
 
 model Course {
-  id               Int            @id @default(autoincrement())
-  title            String
-  courseCategory   CourseCategory @relation(fields: [courseCategoryId], references: [id])
+  id               Int              @id @default(autoincrement())
   courseCategoryId Int
-  description      String         @db.VarChar(1000)
-  objective        String         @db.VarChar(1000)
-  requirement      String         @db.VarChar(1000)
-  syllabus         String         @db.VarChar(10000)
-  author           User           @relation(fields: [authorId], references: [id])
-  authorId         Int
-  language         Language       @default(English)
+  language         Language         @default(English)
   price            Float
   discountPercent  Float?
   rating           Float?
-  titleVideo       String?
-  ratingCount      Int            @default(0)
-  enrollCount      Int            @default(0)
-  thumbnail        String?
-  subtitle         String?
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-
-  // Foreign Keys
-  courseReview   CourseReview[]
-  qna            QnA[]
-  cart           Cart[]
-  EnrolledCourse EnrolledCourse[]
+  ratingCount      Int              @default(0)
+  enrollCount      Int              @default(0)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  authorId         Int
+  isVerified       Boolean          @default(false)
+  Assignment       Assignment[]
+  cart             Cart[]
+  author           User             @relation(fields: [authorId], references: [id])
+  courseCategory   CourseCategory   @relation(fields: [courseCategoryId], references: [id])
+  courseReview     CourseReview[]
+  EnrolledCourse   EnrolledCourse[]
+  qna              QnA[]
 }
 
 model CourseReview {
   id          Int      @id @default(autoincrement())
-  course      Course   @relation(fields: [courseId], references: [id])
-  courseId    Int
-  user        User     @relation(fields: [userId], references: [id])
   userId      Int
   description String   @db.VarChar(500)
   rating      Float
   updatedAt   DateTime @updatedAt
+  courseId    Int
+  course      Course   @relation(fields: [courseId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model CourseReviewReply {
   id             Int      @id @default(autoincrement())
-  User           User     @relation(fields: [userId], references: [id])
   userId         Int
   description    String   @db.VarChar(500)
   updatedAt      DateTime @updatedAt
   idCourseReview Int
+  User           User     @relation(fields: [userId], references: [id])
 }
 
 model QnA {
   id            Int      @id @default(autoincrement())
-  user          User     @relation(fields: [userId], references: [id])
   userId        Int
-  course        Course   @relation(fields: [courseId], references: [id])
-  courseId      Int
   description   String   @db.VarChar(500)
   updatedAt     DateTime @updatedAt
   responseCount Int      @default(0)
+  courseId      Int
+  course        Course   @relation(fields: [courseId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
 }
 
 model QnAReply {
   id          Int      @id @default(autoincrement())
-  user        User     @relation(fields: [userId], references: [id])
   userId      Int
   description String   @db.VarChar(500)
   updatedAt   DateTime @updatedAt
   idQnA       Int
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Cart {
   id         Int      @id @default(autoincrement())
-  course     Course   @relation(fields: [courseId], references: [id])
   courseId   Int
-  user       User     @relation(fields: [userId], references: [id])
   userId     Int
   craetedAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   isCheckout Boolean
+  course     Course   @relation(fields: [courseId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model EnrolledCourse {
   id         Int      @id @default(autoincrement())
-  course     Course   @relation(fields: [courseId], references: [id])
   courseId   Int
-  user       User     @relation(fields: [userId], references: [id])
   userId     Int
   enrolledAt DateTime @default(now())
+  course     Course   @relation(fields: [courseId], references: [id])
+  user       User     @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  fullName  String
-  email     String    @unique
-  password  String
-  role      Role      @default(STUDENT)
-  avatar    String?
-  birthdate DateTime?
-  createdAt DateTime  @default(now())
-
-  // if authenticates using oauth 
-  oauthId       String?
-  oauthProvider OAuthProvider?
-
-  // Foreign Keys
-  socialHandle      SocialHandle?
-  course            Course[]
-  courseReview      CourseReview[]
-  qna               QnA[]
-  courseReviewReply CourseReviewReply[]
-  cart              Cart[]
-  QnAReply          QnAReply[]
-  EnrolledCourse    EnrolledCourse[]
-  sentMessages      Message[]           @relation("sentMessages")
-  receivedMessages  Message[]           @relation("receivedMessages")
-  conversation      Conversation[]
-  GameView          GameView[]
+  id                   Int                    @id @default(autoincrement())
+  fullName             String
+  email                String                 @unique
+  password             String
+  role                 Role                   @default(STUDENT)
+  avatar               String?
+  birthdate            DateTime?
+  createdAt            DateTime               @default(now())
+  oauthId              String?
+  oauthProvider        OAuthProvider?
+  Assignment           Assignment[]
+  AssignmentSubmission AssignmentSubmission[]
+  cart                 Cart[]
+  course               Course[]
+  courseReview         CourseReview[]
+  courseReviewReply    CourseReviewReply[]
+  EnrolledCourse       EnrolledCourse[]
+  GameView             GameView[]
+  receivedMessages     Message[]              @relation("receivedMessages")
+  sentMessages         Message[]              @relation("sentMessages")
+  qna                  QnA[]
+  QnAReply             QnAReply[]
+  SearchHistory        SearchHistory[]
+  socialHandle         SocialHandle?
+  conversation         Conversation[]   
 }
 
 model Message {
   id             Int           @id @default(autoincrement())
   message        String
-  sender         User          @relation(name: "sentMessages", fields: [senderId], references: [id])
-  receiver       User          @relation(name: "receivedMessages", fields: [receiverId], references: [id])
   senderId       Int
   receiverId     Int
-  Conversation   Conversation? @relation(fields: [conversationId], references: [id])
-  conversationId Int?
+  conversationId Int
   createdAt      DateTime      @default(now())
+  Conversation   Conversation? @relation(fields: [conversationId], references: [id])
+  receiver       User          @relation("receivedMessages", fields: [receiverId], references: [id])
+  sender         User          @relation("sentMessages", fields: [senderId], references: [id])
 }
 
 model Conversation {
   id           Int       @id @default(autoincrement())
-  participants User[]
-  messages     Message[]
   createdAt    DateTime  @default(now())
+  messages     Message[]
+  participants User[]    
 }
 
-// Define the Game model
 model Game {
   id               Int                @id @default(autoincrement())
   viewsCount       Int                @default(0)
-  courseCategory   CourseCategory     @relation(fields: [courseCategoryId], references: [id])
   courseCategoryId Int
+  courseCategory   CourseCategory     @relation(fields: [courseCategoryId], references: [id])
   GameView         GameView[]
   gamificationData GamificationData[]
 }
@@ -241,21 +207,84 @@ model GameView {
 }
 
 model Payment {
-  id            Int         @id @default(autoincrement())
-  userId        Int
-  courseId      Int
   paymentMethod String
   amount        Float
-  txnId         Int      @unique
+  id            Int         @id @default(autoincrement())
+  txnId         Int         @unique
+  userId        Int
+  courseId      Int
+  createdAt     DateTime    @default(now())
   transaction   Transaction @relation(fields: [txnId], references: [id])
-  createdAt    DateTime  @default(now())
 }
 
 model Transaction {
-  id      Int      @id @default(autoincrement())
-  oid     String   @unique
-  refid   String
-  amt     Float
-  payment Payment?
-  createdAt    DateTime  @default(now())
+  amt       Float
+  oid       String   @unique
+  refid     String
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  payment   Payment?
+}
+
+model Assignment {
+  id                   Int                    @id @default(autoincrement())
+  courseId             Int
+  title                String
+  instruction          String
+  deadline             DateTime
+  points               Float
+  attachment           String
+  instructorId         Int
+  createdAt            DateTime               @default(now())
+  Course               Course                 @relation(fields: [courseId], references: [id])
+  User                 User                   @relation(fields: [instructorId], references: [id])
+  AssignmentSubmission AssignmentSubmission[]
+}
+
+model AssignmentSubmission {
+  id           Int        @id @default(autoincrement())
+  assignmentId Int
+  studentId    Int
+  attachment   String
+  points       Float      @default(0)
+  feedback     String     @default("")
+  submittedAt  DateTime   @default(now())
+  returnedAt   DateTime?    
+  comment      String     @default("")
+  isReturn     Boolean    @default(false)
+  Assignment   Assignment @relation(fields: [assignmentId], references: [id])
+  User         User       @relation(fields: [studentId], references: [id])
+}
+
+model SearchHistory {
+  id     Int    @id @default(autoincrement())
+  userId Int
+  query  String
+  User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Swiper {
+  id        Int     @id @default(autoincrement())
+  image     String
+  isVisible Boolean @default(true)
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+enum OAuthProvider {
+  GOOGLE
+  FACEBOOK
+  MICROSOFT
+  GITHUB
+  TWITTER
+}
+
+enum Language {
+  English
+  Nepali
+  Hindi
 }
