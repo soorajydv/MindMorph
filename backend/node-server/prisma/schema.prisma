@@ -159,7 +159,7 @@ model User {
   SearchHistory        SearchHistory[]
   socialHandle         SocialHandle?
   conversation         Conversation[]
-  Token                Token[]
+  OTP                  OTP[]
 }
 
 model Message {
@@ -290,10 +290,10 @@ enum Language {
   Hindi
 }
 
-model Token {
+model OTP {
   id        Int      @id @default(autoincrement())
   userId    Int
   User      User     @relation(fields: [userId], references: [id])
   token     String
-  createdAt DateTime @default(now())
+  createdAt DateTime @updatedAt()
 }

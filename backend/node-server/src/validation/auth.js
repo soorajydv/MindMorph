@@ -12,6 +12,13 @@ const user = Joi.object({
   OAuthProvider: Joi.string()
 });
 
+const createPassword = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+  confirmPassword: Joi.string().min(8).required()
+
+});
+
 const loginCredential = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().min(8).required(),
@@ -26,4 +33,4 @@ const oauth2 = Joi.object({
   email: Joi.string().email()
 })
 
-module.exports = { user, loginCredential, oauth2 };
+module.exports = { user, loginCredential, oauth2 ,createPassword};
