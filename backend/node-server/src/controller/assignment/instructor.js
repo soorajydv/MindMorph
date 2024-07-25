@@ -1,13 +1,14 @@
+const { date } = require('joi');
 const prisma = require('../../../prisma/prisma')
 const validator = require('../../validation/assignment.instructor')
 
 const getAssignments = async (req, res) => {
-    const id = parseInt(req.params.id);
+    const instructorId = parseInt(req.params.instructorId);
 
     try {
         const assignments = await prisma.assignment.findMany({
             where: {
-                instructorId: id,
+                instructorId: instructorId,
             },
             include: {
                 course: true,
@@ -34,6 +35,7 @@ const getAssignments = async (req, res) => {
 
 
 const createAssignment = async (req,res)=>{
+    const filePath = req.file.path.replaceAll("\\", "/"); // For windwos device
     const {error,value} = validator.instructorAssignmentCreate.validate({...req.body})
     // If Joi validation fails, send an error response
     if (error) return res.status(400).json({ message: error.details[0].message });
@@ -46,7 +48,7 @@ const createAssignment = async (req,res)=>{
                 instruction:value.instruction,
                 deadline:value.deadline,
                 points:value.points,
-                attachment:value.attachment,
+                attachment:filePath,
                 instructorId:value.instructorId
             }
         })
@@ -133,4 +135,42 @@ const deleteAssignment = async(req,res)=>{
     }
 }
 
-module.exports = {getAssignments,createAssignment,getCreatedAssignment,updateAssignment,deleteAssignment}
+const returnAssignment = async(req,res) =>{
+    const { error, value } = validator.returnAssignment.validate({
+        ...req.body
+      });
+
+    console.log(value)
+      // If Joi validation fails, send an error response
+      if (error) return res.status(400).json({ message: error.details[0].message });
+
+    try{
+        const assignment = await prisma.assignmentSubmission.findUnique({
+            where:{
+                id:value.id
+            }
+        });
+        if(assignment){
+            const result = await prisma.assignmentSubmission.update({
+                where:{
+                    id:value.id
+                },
+                data:{
+                    points:value.points,
+                    feedback:value.feedback,
+                    returnedAt:new Date(),
+                    isReturn:true
+                }
+            });
+            return res.status(200).json({ message: "Assignment Returned", result})
+        }
+        return res.status(400).json({ message: 'Assignment does\'nt exist' });
+
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+
+    }
+}
+
+module.exports = {getAssignments,createAssignment,getCreatedAssignment,updateAssignment,deleteAssignment,returnAssignment}

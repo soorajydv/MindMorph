@@ -19,4 +19,10 @@ const instructorAssignmentUpdate = Joi.object({
     points: Joi.number(),
     attachment:Joi.string()
   });
-module.exports = {instructorAssignmentCreate,instructorAssignmentUpdate}
+
+const returnAssignment = Joi.object({
+  id:Joi.number().required(),
+  points:Joi.number().required(),
+  feedback:Joi.string()
+})
+module.exports = {instructorAssignmentCreate,instructorAssignmentUpdate,returnAssignment}

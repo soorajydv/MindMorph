@@ -2,7 +2,9 @@ const prisma = require('../../../prisma/prisma')
 const validator = require('../../validation/assignment.student')
 
 const submitAssignment = async(req,res)=>{
+    const filePath = req.file.path.replaceAll("\\", "/"); // For windwos device
     const {error,value} = validator.assignmentSubmition.validate({...req.body})
+    console.log(value);
     // If Joi validation fails, send an error response
     if (error) return res.status(400).json({ message: error.details[0].message });
 
@@ -18,7 +20,7 @@ const submitAssignment = async(req,res)=>{
                 data: {
                     assignmentId: value.assignmentId,
                     studentId: value.studentId,
-                    attachment: value.attachment,
+                    attachment: filePath,
                     comment: value.comment
                 }
             })

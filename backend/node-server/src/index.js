@@ -28,6 +28,10 @@ const oauthFbRouter = require('./router/oauthFb');
 const gameRouter = require('./router/game')
 const esewaRouter = require('./router/esewa')
 const swiper = require('./router/swiper')
+const assignmentRouterInst = require('./router/assignment/instructor')
+const assignmentRouterStd = require('./router/assignment/student')
+const assignmentRouter = require('./router/assignment/assignment')
+const verifyCourseRouter = require('./router/verifyCourse')
 
 // Import Controllers
 const initializeSocket = require('./socket/chat/socket');
@@ -88,7 +92,11 @@ app.use('/', oauthRouter);
 app.use('/', oauthFbRouter);
 app.use('/', gameRouter);
 app.use('/',esewaRouter);
-app.use('/swiper',swiper)
+app.use('/swiper',swiper);
+app.use('/assignment',assignmentRouter)
+app.use('/assignment/instructor',assignmentRouterInst)
+app.use('/assignment/student',assignmentRouterStd)
+app.use('/course',verifyCourseRouter)
 
 // The 404 Route
 app.use('*', function (req, res, next) {
