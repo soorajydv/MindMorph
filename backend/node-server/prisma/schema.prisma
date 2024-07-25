@@ -63,6 +63,7 @@ model Course {
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
   authorId         Int
+  isVerified       Boolean          @default(false)
   Assignment       Assignment[]
   cart             Cart[]
   author           User             @relation(fields: [authorId], references: [id])
@@ -248,6 +249,7 @@ model AssignmentSubmission {
   points       Float      @default(0)
   feedback     String     @default("")
   submittedAt  DateTime   @default(now())
+  returnedAt   DateTime?    
   comment      String     @default("")
   isReturn     Boolean    @default(false)
   Assignment   Assignment @relation(fields: [assignmentId], references: [id])
