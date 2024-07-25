@@ -5,7 +5,7 @@ const controller = require('../../controller/assignment/instructor')
 
 router.post('',middleware('uploadAssignment','file'),controller.createAssignment);
 router.get('/:instructorId',controller.getAssignments)
-router.patch('',controller.updateAssignment)
+router.patch('',middleware('uploadAssignment','file'),controller.updateAssignment)
 router.delete('/:id',controller.deleteAssignment)
 router.patch('/return/:id',controller.returnAssignment)
 

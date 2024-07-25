@@ -158,7 +158,8 @@ model User {
   QnAReply             QnAReply[]
   SearchHistory        SearchHistory[]
   socialHandle         SocialHandle?
-  conversation         Conversation[]   
+  conversation         Conversation[]
+  Token                Token[]
 }
 
 model Message {
@@ -177,7 +178,7 @@ model Conversation {
   id           Int       @id @default(autoincrement())
   createdAt    DateTime  @default(now())
   messages     Message[]
-  participants User[]    
+  participants User[]
 }
 
 model Game {
@@ -249,7 +250,7 @@ model AssignmentSubmission {
   points       Float      @default(0)
   feedback     String     @default("")
   submittedAt  DateTime   @default(now())
-  returnedAt   DateTime?    
+  returnedAt   DateTime?
   comment      String     @default("")
   isReturn     Boolean    @default(false)
   Assignment   Assignment @relation(fields: [assignmentId], references: [id])
@@ -287,4 +288,12 @@ enum Language {
   English
   Nepali
   Hindi
+}
+
+model Token {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  User      User     @relation(fields: [userId], references: [id])
+  token     String
+  createdAt DateTime @default(now())
 }

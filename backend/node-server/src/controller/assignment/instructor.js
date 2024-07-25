@@ -35,26 +35,27 @@ const getAssignments = async (req, res) => {
 
 
 const createAssignment = async (req,res)=>{
-    const filePath = req.file.path.replaceAll("\\", "/"); // For windwos device
-    const {error,value} = validator.instructorAssignmentCreate.validate({...req.body})
+    if (!req.file) return res.status(400).json({ message: 'Assignment file is required' });
+    const attachment = req.file.path.replaceAll("\\", "/"); // For windwos device
+    const {error,value} = validator.instructorAssignmentCreate.validate({...req.body,attachment})
     // If Joi validation fails, send an error response
     if (error) return res.status(400).json({ message: error.details[0].message });
 
     try{
-        await prisma.assignment.create({
+        const data = await prisma.assignment.create({
             data:{
                 courseId:value.courseId,
                 title:value.title,
                 instruction:value.instruction,
                 deadline:value.deadline,
                 points:value.points,
-                attachment:filePath,
+                attachment:attachment,
                 instructorId:value.instructorId
             }
         })
-        return res.status(200).json({ message: "Assignment Created" })
+        return res.status(200).json({ message: "Assignment Created" ,data})
     }catch(error){
-        return res.status(500).json({ message: 'Internal Server Error' });
+        return res.status(500).json({ message: 'Internal Server Error' ,error});
     }
 }
 
@@ -80,7 +81,9 @@ const getCreatedAssignment = async(req,res)=>{
 }
 
 const updateAssignment = async(req,res)=>{
-    const {error,value} = validator.instructorAssignmentUpdate.validate({...req.body})
+    if (!req.file) return res.status(400).json({ message: 'Assignment file is required' });
+    const attachment = req.file.path.replaceAll("\\", "/"); // For windwos device
+    const {error,value} = validator.instructorAssignmentUpdate.validate({...req.body,attachment})
     // If Joi validation fails, send an error response
     if (error) return res.status(400).json({ message: error.details[0].message });
 
@@ -103,9 +106,7 @@ const updateAssignment = async(req,res)=>{
                     attachment:value.attachment
                 }
             })
-            if(updatedAssignment){
-                console.log("Assignment Updated");
-            }
+           
             return res.status(200).json({ message: "Assignment Updated" })
         }
     }catch(error){
