@@ -32,6 +32,7 @@ const assignmentRouterInst = require('./router/assignment/instructor')
 const assignmentRouterStd = require('./router/assignment/student')
 const assignmentRouter = require('./router/assignment/assignment')
 const verifyCourseRouter = require('./router/verifyCourse')
+const incomeRouter = require('./router/instructor.income')
 
 // Import Controllers
 const initializeSocket = require('./socket/chat/socket');
@@ -97,6 +98,7 @@ app.use('/assignment',assignmentRouter)
 app.use('/assignment/instructor',assignmentRouterInst)
 app.use('/assignment/student',assignmentRouterStd)
 app.use('/course',verifyCourseRouter)
+app.use('/instructor',incomeRouter)
 
 // The 404 Route
 app.use('*', function (req, res, next) {
