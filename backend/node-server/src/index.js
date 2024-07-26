@@ -85,7 +85,7 @@ app.use('/cart', cartRouter);
 app.use('/enroll', enrollCourseRouter);
 app.use('/', oauthRouter);
 app.use('/', oauthFbRouter);
-app.use('/', gameRouter);
+app.use('/game', gameRouter);
 app.use('/',esewaRouter)
 // The 404 Route
 app.use('*', function (req, res, next) {

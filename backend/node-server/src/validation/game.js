@@ -1,18 +1,13 @@
 const Joi = require('joi');
 
-const createGame = Joi.object({
-    courseCategoryId:Joi.number().required()
-    // text:Joi.string().required(),
-    // imageUrl:Joi.string()
-})
+const createGameSchema = Joi.object({
+    courseCategoryId: Joi.number().integer().required(),
+    text: Joi.string().required(),
+});
 
-const updateGameByGameId = Joi.object({
-    gameId:Joi.number().required(),
-    gamificationDataId:Joi.number(),
-    courseCategoryId:Joi.number(),
-    text:Joi.string(),
-    imageUrl:Joi.string()
-})
+const updateGameByGameIdSchema = Joi.object({
+    gameId: Joi.number().integer().required(),
+    text: Joi.string().required(),
+});
 
-
-module.exports = {createGame,updateGameByGameId}
+module.exports = { createGameSchema,updateGameByGameIdSchema };

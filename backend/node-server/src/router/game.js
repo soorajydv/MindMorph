@@ -1,10 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const { createGame,getGameByCourseCategory,updateGameByGameId,deleteGameByGameId } = require('../controller/game')
+const express = require('express');
+const router = express.Router();
+const uploadFile = require('../middleware/imageUpload');
+const { createGame, getGameByCourseCategory, updateGameByGameId, deleteGameByGameId } = require('../controller/game');
 
-router.get('/game/:id',getGameByCourseCategory)
-router.post('/game',createGame)
-router.patch('/game',updateGameByGameId)
-router.delete('/game/:id',deleteGameByGameId)
+// Route to get a game by course category ID
+router.get('/:userId', getGameByCourseCategory);
 
-module.exports = router
+// Route to create a new game with image upload
+router.post('/', uploadFile('gameImage', 'image'), createGame);
+
+// Route to update an existing game with image upload
+router.patch('/', uploadFile('gameImage', 'image'), updateGameByGameId);
+
+// Route to delete a game by its ID
+router.delete('/:id', deleteGameByGameId);
+
+module.exports = router;
+    
