@@ -36,22 +36,134 @@ const submitAssignment = async(req,res)=>{
     
 }
 
-const getAllAssignments = async(req,res)=>{
-    const enrolledCourseid = parseInt(req.params.enrolledCourseid)
+const getAllAssignments = async (req, res) => {
+    const studentId = parseInt(req.params.studentId);
 
-    try{
-        const assignment = await prisma.assignment.findMany({
-            where:{
-                courseId:enrolledCourseid
+    if (isNaN(studentId)) {
+        return res.status(400).json({ message: 'Invalid student ID' });
+    }
+
+    try {
+        // Fetch enrolled courses for the student
+        const enrolledCourses = await prisma.payment.findMany({
+            where: {
+                userId: studentId
+            },
+            select: {
+                courseId: true
             }
-        })
-        if(assignment){
-            return res.status(200).json({ "Your assignments are:": assignment })
+        });
+
+        const enrolledCourseIds = enrolledCourses.map(payment => payment.courseId);
+
+        if(enrolledCourseIds>0){
+            // Fetch all assignments submitted by the student
+        const submittedAssignments = await prisma.assignmentSubmission.findMany({
+            where: {
+                studentId: studentId
+            }
+        });
+
+        const submittedAssignmentIds = submittedAssignments.map(assignmentSubmission => assignmentSubmission.assignmentId);
+
+        // Get the current date and time
+        const now = new Date();
+
+        // Fetch assignments that are not yet submitted and whose deadline has not crossed
+        const newAssignments = await prisma.assignment.findMany({
+            where: {
+                courseId: {
+                    in: enrolledCourseIds
+                },
+                id: {
+                    notIn: submittedAssignmentIds
+                },
+                deadline: {
+                    gte: now
+                }
+            },
+            select: {
+                id: true,
+                title: true,
+                deadline: true
+            }
+        });
+
+        // Fetch assignments that are not yet submitted and whose deadline has crossed
+        const dueAssignments = await prisma.assignment.findMany({
+            where: {
+                courseId: {
+                    in: enrolledCourseIds
+                },
+                id: {
+                    notIn: submittedAssignmentIds
+                },
+                deadline: {
+                    lt: now
+                }
+            },
+            select: {
+                id: true,
+                title: true,
+                deadline: true
+            }
+        });
+
+        // Fetch assignments returned by the teacher
+        const returnedAssignments = await prisma.assignmentSubmission.findMany({
+            where: {
+                studentId: studentId,
+                isReturn: true
+            },
+            select: {
+                assignmentId: true
+            }
+        });
+
+        // Fetch assignments submitted but not yet returned
+        const pendingAssignments = await prisma.assignmentSubmission.findMany({
+            where: {
+                studentId: studentId,
+                isReturn: false
+            },
+            select: {
+                assignmentId: true
+            }
+        });
+
+        // Fetch all assignments for enrolled courses
+        const allAssignments = await prisma.assignment.findMany({
+            where: {
+                courseId: {
+                    in: enrolledCourseIds
+                }
+            },
+            select: {
+                id: true,
+                title: true,
+                deadline: true
+            }
+        });
+        console.log(allAssignments);
+
+        // Respond with all categories of assignments
+        return res.status(200).json({
+            newAssignments,
+            dueAssignments,
+            returnedAssignments,
+            pendingAssignments,
+            allAssignments
+        });
+        }else{
+            return res.status(500).json({ message: 'No course enrolled' });
         }
-    }catch(error){
+    } catch (error) {
+        console.error('Error fetching assignments:', error);
         return res.status(500).json({ message: 'Internal Server Error' });
     }
-}
+};
+
+
 
 const updateAssignment = async (req, res) => {
     const { error, value } = validator.assignmentSubmition.validate({ ...req.body });
